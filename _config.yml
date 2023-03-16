@@ -1,0 +1,12 @@
+# Site settings
+title: Plata - WizWealth, Optimized
+email: wizwealth@gmail.com
+description: "Landing page for a tool that finds you the best credit card and savings account, with data to personlize to the max."
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+
+twitter_username:
+github_username:
+
+# Build settings
+markdown: kramdown
