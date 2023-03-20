@@ -188,6 +188,11 @@ header {
     color: #0f1414;
 }
 
+.hero-charts-container {
+    background-color:  $theme-primary;
+    color: #0f1414;
+}
+
 .portfolio-box {
     position: relative;
     display: block;
@@ -362,4 +367,28 @@ body {
     font-family: 'DM Sans', sans-serif;
     color: #0f1414;
     font-size: 14px;
+}
+
+.account-detail-chart {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    margin: 0px 0px;
+    text-align: left;
+    display: inline-block;
+}
+
+.account-value-chart {
+    text-align: left;
+}
+
+.circle-chart {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+.chart-info {
+    text-align: left;
 }

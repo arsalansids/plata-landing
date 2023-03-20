@@ -1,15 +1,49 @@
-<section class="hero-images-container">
-    <div class="container">
+<section class="hero-charts-container">
+    <div class="container bg-primary">
         <div class="row">
             <div class="col-lg-5 col-md-5 text-center">
-                <h2 class="section-heading">Find your ideal savings account</h2>
+                <h2 class="section-heading">The ideal savings account.</h2>
                 <div class="spacer-small"></div>
-                <img class="img-responsive center-block img-rounded" src="/img/savings.png" style="max-width:100%";>
+                <div id="chart-container-savings"></div>
+                <script src="/js/savings-chart.js"></script>
+                <div class="row">
+                    <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                        <div>
+                            <span class="circle-chart" style="background-color: #7CB6B7;"></span>
+                            <p class="account-detail-chart">Current Savings Interest</p>
+                        </div>
+                        <h4 class="account-value-chart" id="savings1-value">$ 10100</h4>
+                    </div>
+                    <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                        <div>
+                            <span class="circle-chart" style="background-color: #FAB131;"></span>
+                            <p class="account-detail-chart">New Savings Interest</p>
+                        </div>
+                        <h4 class="account-value-chart" id="savings2-value">$ 10511</h4>
+                    </div>
+                </div>  
             </div>
-            <div class="col-lg-5 col-lg-offset-2 col-md-5 col-md-offset-2 text-center">
-                <h2 class="section-heading">Find your ideal credit card</h2>
+            <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 text-center">
+                <h2 class="section-heading">The ideal credit card.</h2>
                 <div class="spacer-small"></div>
-                <img class="img-responsive center-block img-rounded" src="/img/credit.png" style="max-width:100%";>
+                <div id="chart-container-credit"></div>
+                <script src="/js/credit-card-chart.js"></script>
+                <div class="row">
+                    <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                        <div>
+                            <span class="circle-chart" style="background-color: #7CB6B7;"></span>
+                            <p class="account-detail-chart">Current Cashback</p>
+                        </div>
+                        <h4 class="account-value-chart" id="credit1-value">$ 10100</h4>
+                    </div>
+                    <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                        <div>
+                            <span class="circle-chart" style="background-color: #FAB131;"></span>
+                            <p class="account-detail-chart">New Card Cashback</p>
+                        </div>
+                        <h4 class="account-value-chart" id="credit2-value">$ 10511</h4>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>
