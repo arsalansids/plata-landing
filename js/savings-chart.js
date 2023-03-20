@@ -36,12 +36,6 @@ var chartOptions = {
     height: 200,
     backgroundColor: '#0c3226',
   },
-  events: {
-    mouseOver: function () {
-        var savingsValue = this.y.toFixed(0);
-        document.getElementById('testp').innerText = savingsValue;
-    }
-},
   title: {
     text: null
   },

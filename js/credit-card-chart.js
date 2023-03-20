@@ -1,23 +1,15 @@
-var cashback = 10000;
-
 // Define the data for the two series
-var chartCreditData = [  {    name: '0.01%',    data: []
+var chartCreditData = [  
+  {    
+    name: 'Current Card',    
+    data: [ 5.20, 11.09, 4.23, 2.58, 1.94, 15.21, 13.76, 12.98, 8.09, 9.23, 11.24, 15.23 ]
   },
   {
-    name: '0.05%',
-    data: []
+    name: 'New Card',
+    data: [ 25.48, 55.09, 40.43, 25.18, 13.84, 97.28, 53.56, 34.16, 34.48, 42.46, 34.75, 48.99 ]
   }
 ];
 
-// Fill in the data for the two series
-var monthCashback1 = cashback;
-var monthCashback2 = cashback;
-for (var i = 0; i < 13; i++) {
-    chartCreditData[0].data.push(monthCashback1);
-    chartCreditData[1].data.push(monthCashback2);
-    monthCashback1 = monthCashback1 * (1 + (0.01/12));
-    monthCashback2 = monthCashback2 * (1 + (0.05/12));
-}
 
 
 // Define the options for the chart
@@ -44,7 +36,6 @@ var chartOptions = {
     title: {
       text: '',
     },
-    min: cashback,
     visible: false
   },
   legend: {
