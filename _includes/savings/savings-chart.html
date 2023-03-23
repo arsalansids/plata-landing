@@ -1,16 +1,23 @@
 <div class="savings-calc-container">
-    <div class="bg-primary col-lg-9 col-md-9 calc-comparison-container">
+    <div class="col-lg-9 col-md-9 calc-comparison-container">
         <div class="row">
             <div class="col-lg-6 col-md-6"> 
-                <button type="button" class="btn btn-primary pick-bank-btn">Pick a Bank</button>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>	
+                    <input id="initial_savings_input" type="text" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="10000">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">%</span>	
+                    <input id="interest_rate_input"  type="text" class="form-control" aria-label="Interest Rate" placeholder="1.5">
+                </div>
+                <button id="calculate-savings" type="button" class="btn btn-primary">Calculate</button>
             </div>  
             <div class="col-lg-6 col-md-6"> 
-                <button type="button" class="btn btn-primary pick-bank-btn">Pick a Bank to Compare with</button>
+                <h3>Pick a Bank to Compare with on the right</h3>
             </div>  
         </div>
         <div class="row">
             <div id="chart-container-savings"></div>
-            <script src="/js/savings-chart.js"></script>
         </div>
         <div class="row">
             <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
