@@ -10,15 +10,6 @@ var chartData = [  {    name: '0.01%',    data: []
   }
 ];
 
-// Fill in the data for the two series
-// for (var i = 0; i < 12; i++) {
-//   var monthSavings1 = savings * (1 + (0.0001 * (i + 1)));
-//   var monthSavings2 = savings * (1 + (0.0005 * (i + 1)));
-//   chartData[0].data.push(monthSavings1.toFixed(2));
-//   chartData[1].data.push(monthSavings2.toFixed(2));
-// }
-
-// Fill in the data for the two series
 var monthSavings1 = savings;
 var monthSavings2 = savings;
 for (var i = 0; i < 13; i++) {

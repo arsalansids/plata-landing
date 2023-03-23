@@ -10,7 +10,14 @@ var chartCreditData = [
   }
 ];
 
+currentSum = chartCreditData[0].data.reduce(function(pv, cv) { return pv + cv; }, 0);
+newSum = chartCreditData[1].data.reduce(function(pv, cv) { return pv + cv; }, 0);
 
+function calculateSum(array, x) {
+  console.log(x);
+  editedArray = array.slice(0, x+1);
+  return editedArray.reduce(function(pv, cv) { return pv + cv; }, 0).toFixed(0);
+}
 
 // Define the options for the chart
 var chartOptions = {
@@ -19,12 +26,6 @@ var chartOptions = {
     height: 200,
     backgroundColor: '#0c3226',
   },
-  events: {
-    mouseOver: function () {
-        var savingsValue = this.y.toFixed(0);
-        document.getElementById('testp').innerText = savingsValue;
-    }
-},
   title: {
     text: null
   },
@@ -46,15 +47,15 @@ var chartOptions = {
         point: {
             events: {
                 mouseOver: function () {
-                    document.getElementById('credit1-value').innerText = '$ ' + chartCreditData[0].data[this.x].toFixed((0));
-                    document.getElementById('credit2-value').innerText = '$ ' + chartCreditData[1].data[this.x].toFixed((0));
+                    document.getElementById('credit1-value').innerText = '$ ' + calculateSum(chartCreditData[0].data, this.x);
+                    document.getElementById('credit2-value').innerText = '$ ' + calculateSum(chartCreditData[1].data, this.x);
                 }
             }
         },
         events: {
             mouseOut: function () {
-                document.getElementById('credit1-value').innerText = '$ ' + chartCreditData[0].data[12].toFixed((0));
-                document.getElementById('credit2-value').innerText = '$ ' + chartCreditData[1].data[12].toFixed((0));
+                document.getElementById('credit1-value').innerText = '$ ' + currentSum.toFixed((0));
+                document.getElementById('credit2-value').innerText = '$ ' + newSum.toFixed((0));
             }
         },
         color: '#90CAF9',
