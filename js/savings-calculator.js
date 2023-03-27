@@ -280,6 +280,6 @@ calcButton.addEventListener('click', function() {
   //   max: savings
   // });
 
-  document.getElementById('savings1-value').innerText = '$ ' + series1Data[12].toFixed((0));
-
+  document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
+  document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
 });

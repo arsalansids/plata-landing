@@ -1,10 +1,11 @@
 <div class="savings-calc-container">
     <div class="col-lg-9 col-md-9 calc-comparison-container">
         <div class="row">
-            <div class="col-lg-6 col-md-6"> 
+            <div class="col-lg-6 col-md-6">
+                Enter your current savings account here: 
                 <div class="input-group">
                     <span class="input-group-addon">$</span>	
-                    <input id="initial_savings_input" type="text" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="10000">
+                    <input id="initial_savings_input" type="text" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="Current savings">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">%</span>	
@@ -23,14 +24,14 @@
             <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
                 <div>
                     <span class="circle-chart" style="background-color: #7CB6B7;"></span>
-                    <p class="account-detail-chart">Current Savings Interest</p>
+                    <p class="account-detail-chart">Future Savings with Current Interest Rate</p>
                 </div>
                 <h4 class="account-value-chart" id="savings1-value">$ 10100</h4>
             </div>
             <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
                 <div>
                     <span class="circle-chart" style="background-color: #FAB131;"></span>
-                    <p class="account-detail-chart">New Savings Interest</p>
+                    <p class="account-detail-chart">Future Savings with New Interest Rate</p>
                 </div>
                 <h4 class="account-value-chart" id="savings2-value">$ 10511</h4>
             </div>
@@ -46,7 +47,7 @@
     </div>
     <div class="col-lg-3 col-md-3">
         <!-- Banks List Section -->
-        <p>Choose a product</h4>
+        <p>Choose a product to compare</h4>
         <div id="savings-products-list" class="list-group"></div>
     </div>
 </div>
