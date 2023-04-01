@@ -414,3 +414,72 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
   }
+
+// Clickable Persona Pentagon  
+.pentagon {
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .pentagon::before,
+  .pentagon::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  
+  .pentagon::before {
+    top: 0;
+    left: 50%;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 65px solid #ccc;
+  }
+  
+  .pentagon::after {
+    bottom: 0;
+    left: 50%;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-top: 65px solid #ccc;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+  }
+  
+  .dot1 {
+    top: 0;
+    left: 50%;
+  }
+  
+  .dot2 {
+    top: 23%;
+    left: 17%;
+  }
+  
+  .dot3 {
+    top: 67%;
+    left: 17%;
+  }
+  
+  .dot4 {
+    top: 67%;
+    left: 83%;
+  }
+  
+  .dot5 {
+    top: 23%;
+    left: 83%;
+  }
+  
+  .dot.active {
+    background-color: red;
+  }
+  
