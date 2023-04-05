@@ -1,18 +1,11 @@
 <div class="savings-calc-container">
-    <div class="pentagon">
-        <div class="dot dot1"></div>
-        <div class="dot dot2"></div>
-        <div class="dot dot3"></div>
-        <div class="dot dot4"></div>
-        <div class="dot dot5"></div>
-    </div>
     <div class="col-lg-9 col-md-9 calc-comparison-container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <h4>Pick a credit card</h4>
             </div>  
             <div class="col-lg-6 col-md-6"> 
-                <h4>What kind of spending habits do you have?</h4>
+                <h4>Spending Habits</h4>
             </div>  
         </div>
         <div class="row">
@@ -44,8 +37,23 @@
         </div>
     </div>
     <div class="col-lg-3 col-md-3">
+        <div class="container">
+            <svg viewBox="-50 -50 300 300" width="180" height="180">
+                <polygon points="100,10 190,80 150,180 50,180 10,80"
+                         style="fill:#299255;stroke:black;stroke-width:5;" />
+                <circle id="corner1" cx="100" cy="10" r="10" fill="black" />
+                <circle id="corner2" cx="190" cy="80" r="10" fill="black" />
+                <circle id="corner3" cx="150" cy="180" r="10" fill="black" />
+                <circle id="corner4" cx="50" cy="180" r="10" fill="black" />
+                <circle id="corner5" cx="10" cy="80" r="10" fill="black" />
+                <text x="100" y="-5" text-anchor="middle" font-size="14">Groceries</text>
+                <text x="245" y="80" text-anchor="end" font-size="14">Travel</text>
+                <text x="150" y="204" text-anchor="middle" font-size="14">Auto &amp; Gas</text>
+                <text x="-10" y="204" text-anchor="start" font-size="14">Restaurants</text>
+                <text x="-42" y="80" text-anchor="start" font-size="14">Other</text>
+            </svg>
+        </div>
         <!-- Banks List Section -->
-        <p>Choose a product to compare</h4>
         <div id="savings-products-list" class="list-group"></div>
     </div>
 </div>
