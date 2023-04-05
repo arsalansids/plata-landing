@@ -50,6 +50,31 @@ const credit_card_info = [
         "annual_fee": 120,
         "promotional_annual_fee": 0,
         "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "RBC",
+        "name": "Cashback Preferred World Elite Mastercard",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/RBC-Cash-Back-Preferred-World-Elite-Mastercard1.png",
+        "standard_cashback_rates": {
+          "gas": 0.015,
+          "groceries": 0.015,
+          "entertainment": 0.015,
+          "travel": 0.015,
+          "other": 0.015
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.015,
+          "groceries": 0.015,
+          "entertainment": 0.015,
+          "travel": 0.015,
+          "other": 0.015
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": null, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 99,
+        "promotional_annual_fee": 99,
+        "promotional_bonus": 0 // in dollars
       }
     ];
   
