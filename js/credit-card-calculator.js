@@ -1,173 +1,135 @@
-function calculateMonthlySavings(interestRate, array_length, initial_savings, promotion_length = 0, promotion_rate = 0) {
-  var monthSavings = initial_savings;
-  var savings_array = [];
-  for (var i = 0; i < promotion_length; i++) {
-    savings_array.push(monthSavings);
-    monthSavings = monthSavings * (1 + (promotion_rate/100 / 12));
+function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
+  var monthly_cashback = 0;
+  let categories = Object.keys(cashback_rates);
+  categories.forEach((category) => {
+    monthly_cashback += cashback_rates[category] * monthly_avg_spend * persona[category];
+  });
+
+  // The monthly cashback is for a single month
+  return monthly_cashback; 
+};
+
+function calculateCashbackAllMonths(monthly_avg_spend, cashback_rates, persona) {
+  var cashback = [];
+  for (let i = 0; i < 12; i++) {
+    cashback.push(calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona));
   }
-  for (var i = 0; i < array_length - promotion_length + 1; i++) {
-    savings_array.push(monthSavings);
-    monthSavings = monthSavings * (1 + (interestRate/100 / 12));
-  }
-  return savings_array;
+  return cashback;
 }
 
-var accounts_info = [
-      {
-        "bank": "EQ Bank",
-        "name": "Savings Plus Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 2.50
-      },
-      {
-        "bank": "Saven Financial",
-        "name": "High Interest Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 3.75
-      },
+function totalCashback(array_cashback) {
+  var total = 0;
+  array_cashback.forEach((cashback) => {
+    total += cashback;
+  });
+  return total;
+}
+
+const credit_card_info = [
       {
         "bank": "Scotiabank",
-        "name": "Momentum PLUS Savings Account (360-premium)",
-        "initial_interest_rate": 5.00,
-        "promotion_length": 5,
-        "standard_interest_rate": 1.60
-      },
-      {
-        "bank": "Alterna Bank",
-        "name": "High Interest eSavings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 2.50
-      },
-      {
-        "bank": "National Bank",
-        "name": "High Interest Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 1.50
-      },
-      {
-        "bank": "DUCA Credit Union",
-        "name": "Earn More Savings Promotion Account",
-        "initial_interest_rate": 4.75,
-        "promotion_length": 1,
-        "standard_interest_rate": 1.00
-      },
-      {
-        "bank": "HSBC",
-        "name": "High Rate Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 1.05
-      },
-      {
-        "bank": "Simplii Financial",
-        "name": "High Interest Savings Account",
-        "initial_interest_rate": 5.25,
-        "promotion_length": 1,
-        "standard_interest_rate": 0.40
-      },
-      {
-        "bank": "Scotiabank",
-        "name": "Money Master Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 0.01
-      },
-      {
-        "bank": "Oaken Financial",
-        "name": "Oaken Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 3.40
-      },
-      {
-        "bank": "CIBC",
-        "name": "eAdvantage Savings Account",
-        "initial_interest_rate": 4.25,
-        "promotion_length": 4,
-        "standard_interest_rate": 1.40
-      },
-      {
-        "bank": "Scotiabank",
-        "name": "Savings Accelerator Account",
-        "initial_interest_rate": 4.05,
-        "promotion_length": 1,
-        "standard_interest_rate": 1.40
-      },
-      {
-        "bank": "RBC Royal Bank",
-        "name": "High Interest eSavings",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 1.50
-      },
-      {
-        "bank": "TD Bank",
-        "name": "High Interest Savings Account",
-        "initial_interest_rate": 0,
-        "promotion_length": 0,
-        "standard_interest_rate": 0.05
-      },
-      {
-        "bank": "TD Bank",
-        "name": "Every Day Savings Account",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 0.01
-      },
-      {
-        "bank": "RBC Royal Bank",
-        "name": "Day to Day Savings",
-        "initial_interest_rate": 0.00,
-        "promotion_length": 0,
-        "standard_interest_rate": 0.01
+        "name": "Momentum Visa Infinite",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Scotia-Momentum-Visa-Infinite-Card.jpg",
+        "standard_cashback_rates": {
+          "gas": 0.02,
+          "groceries": 0.04,
+          "entertainment": 0.01,
+          "travel": 0.01,
+          "other": 0.018
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.10,
+          "groceries": 0.10,
+          "entertainment": 0.10,
+          "travel": 0.10,
+          "other": 0.10
+        },
+        "promotional_reward_length": 3,
+        "promotional_reward_limit": 2000, // in dollars
+        "promotional_fee_length": 12,
+        "annual_fee": 120,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
       }
     ];
   
+const personas = 
+  {
+    "average": {
+      "gas": 0.072,
+      "groceries": 0.115,
+      "entertainment": 0.127,
+      "travel": 0.157,
+      "other": 0.529
+    },
+    "gas": {
+      "gas": 0.171,
+      "groceries": 0.103,
+      "entertainment": 0.113,
+      "travel": 0.14,
+      "other": 0.473
+    },
+    "groceries": {
+      "gas": 0.069,
+      "groceries": 0.162,
+      "entertainment": 0.12,
+      "travel": 0.148,
+      "other": 0.501
+    },
+    "entertainment": {
+      "gas": 0.066,
+      "groceries": 0.105,
+      "entertainment": 0.201,
+      "travel": 0.143,
+      "other": 0.484
+    },
+    "travel": {
+      "gas": 0.071,
+      "groceries": 0.113,
+      "entertainment": 0.125,
+      "travel": 0.17,
+      "other": 0.521
+    },
+    "other": {
+      "gas": 0.058,
+      "groceries": 0.092,
+      "entertainment": 0.101,
+      "travel": 0.125,
+      "other": 0.624
+    },
+  };
 
 // Load Accounts onto list
- const bankProductsList = document.getElementById('savings-products-list');
-      accounts_info.forEach((product, index) => {
-        const item = document.createElement('a');
+ const bankProductsList = document.getElementById('credit-card-products-list');
+      credit_card_info.forEach((product, index) => {
+        var item = document.createElement('a');
         item.classList.add('list-group-item', 'list-group-item-action');
-        var innerHTML;
-        if (product.initial_interest_rate > 0) {
-          innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 account-btn block">${product.bank} <br> ${product.name} <br> Rate: ${product.standard_interest_rate}% <br> Promotional Rate: ${product.initial_interest_rate}% for ${product.promotion_length} months </button>`;
-        } else {
-          innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 account-btn block">${product.bank} <br> ${product.name} <br> Rate: ${product.standard_interest_rate}% </button>`;
-        }
-        item.innerHTML = innerHTML;
+        item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 account-btn block">
+          <div class="col-lg-3 col-md-3" col-sm-3">
+            <img src=${product.image} alt="buttonpng" height=40px />
+          </div>
+          <div class="col-lg-9 col-md-9 col-sm-9">
+          ${product.bank} <br> ${product.name} </button> 
+          </div>`;
         bankProductsList.appendChild(item);
       });
-
-      // <p class="mb-1">Initial Interest Rate: ${product.initial_interest_rate}%</p>
-      // <p class="mb-1">Promotion Length: ${product.promotion_length} months</p>
-      // <p class="mb-1">Standard Interest Rate: ${product.standard_interest_rate}%</p>
-
 
 
 // Define the data for the two series
 var chartData = [  {    
-    name: accounts_info[0].bank + ':' + accounts_info[0].name,
-    data: []
-  },
-  {
-    name: accounts_info[1].bank + ':' + accounts_info[1].name,
+    name: credit_card_info[0].bank + ':' + credit_card_info[0].name,
     data: []
   }
 ];
 
 // Define the initial savings value
-var savings = 10000;
-chartData[0].data = calculateMonthlySavings(accounts_info[0].standard_interest_rate, 12, savings, accounts_info[0].promotion_length, accounts_info[0].promotion_rate)
-chartData[1].data = calculateMonthlySavings(accounts_info[1].standard_interest_rate, 12, savings, accounts_info[0].promotion_length, accounts_info[0].promotion_rate)
+var spend = 4000;
+var monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[0].standard_cashback_rates, personas['average']);
+chartData[0].data = monthly_cashback;
+var total = totalCashback(monthly_cashback);
 
 // Chart Numbers that update with mouse
 var series0Data = chartData[0].data;
-var series1Data = chartData[1].data;
 
 // Define the options for the chart
 var chartOptions = {
@@ -187,8 +149,8 @@ var chartOptions = {
     title: {
       text: '',
     },
-    min: savings,
-    visible: false
+    min: 0,
+    // visible: false
   },
   legend: {
     enabled: false
@@ -198,15 +160,13 @@ var chartOptions = {
         point: {
             events: {
                 mouseOver: function () {
-                    document.getElementById('savings1-value').innerText = '$ ' + series0Data[this.x].toFixed((0));
-                    document.getElementById('savings2-value').innerText = '$ ' + series1Data[this.x].toFixed((0));
+                    document.getElementById('cash-value').innerText = '$ ' + series0Data[this.x].toFixed((0));
                 }
             }
         },
         events: {
             mouseOut: function () {
-                document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
-                document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
+                document.getElementById('cash-value').innerText = '$ ' + total.toFixed((0));
             }
         },
         color: '#90CAF9',
@@ -218,9 +178,6 @@ var chartOptions = {
   },
   series: [{
     data: chartData[0].data,
-    color: '#7CB6B7'
-}, {
-    data: chartData[1].data,
     color: '#FAB131'
   }],
   credits: {
@@ -232,62 +189,4 @@ var chartOptions = {
 };
 
 // Create the chart
-var savings_chart = Highcharts.chart('chart-container-savings', chartOptions);
-var current_product_index = 0;
-
-// Add click event listeners to each button
-var account_buttons = document.querySelectorAll('.account-btn');
-account_buttons.forEach(function(button) {
-  button.addEventListener('click', function() {
-    // Retrieve the index of the clicked button
-    current_product_index = this.getAttribute('data-index');
-
-    // Retrieve the corresponding account information from the array
-    var account = accounts_info[current_product_index];
-    var data = calculateMonthlySavings(account.standard_interest_rate, 12, savings, account.promotion_length, account.initial_interest_rate);
-
-    // Update the chart data with the new values
-    savings_chart.series[1].update({
-      name: account.name,
-      data,
-    });
-    series1Data = data;
-    document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
-  });
-});
-
-// Add click event for calculate button
-var calcButton = document.getElementById("calculate-savings");
-calcButton.addEventListener('click', function() {
-  var interestRate = parseFloat(document.getElementById('interest_rate_input').value);
-  savings = parseFloat(document.getElementById('initial_savings_input').value);
-  
-  var account = accounts_info[current_product_index];
-
-  var data0 = calculateMonthlySavings(interestRate, 12, savings);
-  var data1 = calculateMonthlySavings(account.standard_interest_rate, 12, savings, account.promotion_length, account.initial_interest_rate);
-
-  savings_chart.series[0].update({
-    name: 'Your Current Rates',
-    data: data0,
-  });
-
-  savings_chart.series[1].update({
-    name: 'Your Current Rates',
-    data: data1,
-  });
-
-  console.log(data0);
-  console.log(data1);
-
-
-  savings_chart.yAxis[0].setExtremes(savings, null);
-
-  // chartOptions.yAxis.min = savings;
-  // savings_chart.yAxis[0].update({
-  //   max: savings
-  // });
-
-  document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
-  document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
-});
+var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);

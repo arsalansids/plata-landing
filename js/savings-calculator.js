@@ -232,7 +232,7 @@ var chartOptions = {
 };
 
 // Create the chart
-var savings_chart = Highcharts.chart('chart-container-savings', chartOptions);
+var savings_chart = Highcharts.chart('container-savings-calc', chartOptions);
 var current_product_index = 0;
 
 // Add click event listeners to each button
