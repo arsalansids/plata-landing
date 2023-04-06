@@ -124,12 +124,13 @@ const personas =
     },
   };
 
-// Load Accounts onto list
+var current_card_index  = 0;
+// Load Cards onto list
  const bankProductsList = document.getElementById('credit-card-products-list');
       credit_card_info.forEach((product, index) => {
         var item = document.createElement('a');
         item.classList.add('list-group-item', 'list-group-item-action');
-        item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 account-btn block">
+        item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 card-btn block">
           <div class="col-lg-3 col-md-3" col-sm-3">
             <img src=${product.image} alt="buttonpng" height=40px />
           </div>
@@ -142,14 +143,14 @@ const personas =
 
 // Define the data for the two series
 var chartData = [  {    
-    name: credit_card_info[0].bank + ':' + credit_card_info[0].name,
+    name: credit_card_info[current_card_index].bank + ':' + credit_card_info[current_card_index].name,
     data: []
   }
 ];
 
-// Define the initial savings value
+// Define the initial cash value
 var spend = 4000;
-var monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[0].standard_cashback_rates, personas['average']);
+var monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[current_card_index].standard_cashback_rates, personas['average']);
 chartData[0].data = monthly_cashback;
 var total = totalCashback(monthly_cashback);
 
@@ -215,3 +216,24 @@ var chartOptions = {
 
 // Create the chart
 var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);
+
+// Add click event listeners to each button
+var card_buttons = document.querySelectorAll('.card-btn');
+card_buttons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    // Retrieve the index of the clicked button
+    current_card_index = this.getAttribute('data-index');
+
+    // Retrieve the corresponding card information from the array
+    var card = credit_card_info[current_card_index];
+    var data = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas['average']);
+
+    // Update the chart data with the new values
+    cash_value_chart.series[0].update({
+      name: card.name,
+      data,
+    });
+    series1Data = data;
+    document.getElementById('cash-value').innerText = '$ ' + totalCashback(data).toFixed((0));
+  });
+});
