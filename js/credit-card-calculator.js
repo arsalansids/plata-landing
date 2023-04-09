@@ -75,6 +75,156 @@ const credit_card_info = [
         "annual_fee": 99,
         "promotional_annual_fee": 99,
         "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "BMO",
+        "name": "Cashback Mastercard",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/10/Student-BMO-CashBack-Mastercard.png",
+        "standard_cashback_rates": {
+          "gas": 0.005,
+          "groceries": 0.03,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.006
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.05,
+          "groceries": 0.05,
+          "entertainment": 0.05,
+          "travel": 0.05,
+          "other": 0.05
+        },
+        "promotional_reward_length": 3,
+        "promotional_reward_limit": null, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "American Express",
+        "name": "SimplyCash Preferred Card",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2022/01/Amex-SimplyCash-Preferred.png",
+        "standard_cashback_rates": {
+          "gas": 0.04,
+          "groceries": 0.04,
+          "entertainment": 0.02,
+          "travel": 0.02,
+          "other": 0.02
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.04,
+          "groceries": 0.04,
+          "entertainment": 0.02,
+          "travel": 0.02,
+          "other": 0.02
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": null, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 119.88,
+        "promotional_annual_fee": 119.88,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Simplii Financial",
+        "name": "Cash Back Visa Card",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Simplii-Financial-Cash-Back-Visa-Card.svg",
+        "standard_cashback_rates": {
+          "gas": 0.015,
+          "groceries": 0.015,
+          "entertainment": 0.0225,
+          "travel": 0.005,
+          "other": 0.007
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.015,
+          "groceries": 0.015,
+          "entertainment": 0.0525,
+          "travel": 0.005,
+          "other": 0.007
+        },
+        "promotional_reward_length": 4,
+        "promotional_reward_limit": 500, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.01,
+          "groceries": 0.01,
+          "entertainment": 0.01,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.01,
+          "groceries": 0.01,
+          "entertainment": 0.01,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "TD",
+        "name": "First Class Travel Visa Infinite",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2022/01/TD-First-Class-Travel-Visa-Infinite-e1667145706354.png",
+        "standard_cashback_rates": { //need to add note about how the points have limited redeem usage
+          "gas": 0.01,
+          "groceries": 0.03,
+          "entertainment": 0.02,
+          "travel": 0.04,
+          "other": 0.012
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.01,
+          "groceries": 0.03,
+          "entertainment": 0.02,
+          "travel": 0.04,
+          "other": 0.012
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 12,
+        "annual_fee": 139,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "TD",
+        "name": "Aeroplan Visa Infinite Card",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2022/04/TD-Aeroplan-Visa-Infinite-Card.jpeg",
+        "standard_cashback_rates": { //need to add note about how the points have limited redeem usage
+          "gas": 0.0223,
+          "groceries": 0.0223,
+          "entertainment": 0.0223,
+          "travel": 0.03345,
+          "other": 0.0223
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.0223,
+          "groceries": 0.0223,
+          "entertainment": 0.0223,
+          "travel": 0.03345,
+          "other": 0.0223
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 12,
+        "annual_fee": 139,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
       }
     ];
   
