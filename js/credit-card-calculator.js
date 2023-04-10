@@ -217,7 +217,7 @@ var chartOptions = {
 // Create the chart
 var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);
 
-// Add click event listeners to each button
+// Add click event listeners to each card button
 var card_buttons = document.querySelectorAll('.card-btn');
 card_buttons.forEach(function(button) {
   button.addEventListener('click', function() {
@@ -233,7 +233,42 @@ card_buttons.forEach(function(button) {
       name: card.name,
       data,
     });
-    series1Data = data;
     document.getElementById('cash-value').innerText = '$ ' + totalCashback(data).toFixed((0));
+  });
+});
+
+let persona = '';
+let currentCircle = null;
+
+// Add event listeners to the pentagon circles
+const zones = document.querySelectorAll('g[id^="zone"]');
+zones.forEach(zone => {
+  zone.addEventListener('click', () => {
+    if (currentCircle) {
+      currentCircle.setAttribute('fill', 'black');
+      currentCircle.setAttribute('r', '10');
+    }
+    currentCircle = circle;
+    currentCircle.setAttribute('fill', '#FAB131');
+    currentCircle.setAttribute('r', '15');
+    if (circle.getAttribute('id') === 'grocery_corner') {
+      persona = 'groceries';
+    } else if (circle.getAttribute('id') === 'travel_corner') {
+      persona = 'travel';
+    } else if (circle.getAttribute('id') === 'auto_corner') {
+      persona = 'gas';
+    } else if (circle.getAttribute('id') === 'entertainment_corner') {
+      persona = 'entertainment';
+    } else if (circle.getAttribute('id') === 'other_corner') {
+      persona = 'other';
+    }
+
+    monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[current_card_index].standard_cashback_rates, personas[persona]);
+    total = totalCashback(monthly_cashback);
+    cash_value_chart.series[0].update({
+      name: credit_card_info[current_card_index].bank + ' ' + credit_card_info[current_card_index].name,
+      data: monthly_cashback,
+    });
+    document.getElementById('cash-value').innerText = '$ ' + totalCashback(monthly_cashback).toFixed((0));
   });
 });
