@@ -1,7 +1,7 @@
 function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
   var monthly_cashback = 0;
   let categories = Object.keys(cashback_rates);
-  categories.forEach((category) => {
+  categories.forEach((category) => {    
     monthly_cashback += cashback_rates[category] * monthly_avg_spend * persona[category];
   });
 
@@ -492,6 +492,12 @@ var chartOptions = {
 // Create the chart
 var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);
 
+// set original persona
+let persona = 'groceries';
+let currentCircle = document.querySelector('#grocery_corner');;
+currentCircle.setAttribute('fill', '#FAB131');
+currentCircle.setAttribute('r', '15');
+
 // Add click event listeners to each card button
 var card_buttons = document.querySelectorAll('.card-btn');
 card_buttons.forEach(function(button) {
@@ -501,7 +507,7 @@ card_buttons.forEach(function(button) {
 
     // Retrieve the corresponding card information from the array
     var card = credit_card_info[current_card_index];
-    var data = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas['average']);
+    var data = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas[persona]);
 
     // Update the chart data with the new values
     cash_value_chart.series[0].update({
@@ -512,13 +518,11 @@ card_buttons.forEach(function(button) {
   });
 });
 
-let persona = '';
-let currentCircle = null;
 
 // Add event listeners to the pentagon circles
-const zones = document.querySelectorAll('g[id^="zone"]');
-zones.forEach(zone => {
-  zone.addEventListener('click', () => {
+const circles = document.querySelectorAll('circle');
+circles.forEach(circle => {
+  circle.addEventListener('click', function() {
     if (currentCircle) {
       currentCircle.setAttribute('fill', 'black');
       currentCircle.setAttribute('r', '10');
@@ -526,6 +530,7 @@ zones.forEach(zone => {
     currentCircle = circle;
     currentCircle.setAttribute('fill', '#FAB131');
     currentCircle.setAttribute('r', '15');
+    
     if (circle.getAttribute('id') === 'grocery_corner') {
       persona = 'groceries';
     } else if (circle.getAttribute('id') === 'travel_corner') {
@@ -540,6 +545,7 @@ zones.forEach(zone => {
 
     monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[current_card_index].standard_cashback_rates, personas[persona]);
     total = totalCashback(monthly_cashback);
+
     cash_value_chart.series[0].update({
       name: credit_card_info[current_card_index].bank + ' ' + credit_card_info[current_card_index].name,
       data: monthly_cashback,
