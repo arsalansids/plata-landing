@@ -233,14 +233,14 @@ const credit_card_info = [
         "standard_cashback_rates": { //these rates are overall averages which is not correct
           "gas": 0.005,
           "groceries": 0.02,
-          "entertainment": 0.02,
+          "entertainment": 0.01,
           "travel": 0.005,
           "other": 0.005
         },
         "promotional_cashback_rates": {
           "gas": 0.005,
           "groceries": 0.02,
-          "entertainment": 0.02,
+          "entertainment": 0.01,
           "travel": 0.005,
           "other": 0.005
         },
