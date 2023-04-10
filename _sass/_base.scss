@@ -446,40 +446,6 @@ body {
     border-top: 65px solid #ccc;
   }
   
-  .dot {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #ccc;
+  .active {
+    background-color: #FAB131;
   }
-  
-  .dot1 {
-    top: 0;
-    left: 50%;
-  }
-  
-  .dot2 {
-    top: 23%;
-    left: 17%;
-  }
-  
-  .dot3 {
-    top: 67%;
-    left: 17%;
-  }
-  
-  .dot4 {
-    top: 67%;
-    left: 83%;
-  }
-  
-  .dot5 {
-    top: 23%;
-    left: 83%;
-  }
-  
-  .dot.active {
-    background-color: red;
-  }
-  
