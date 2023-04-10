@@ -153,21 +153,146 @@ const credit_card_info = [
       },
       {
         "bank": "Tangerine",
-        "name": "Money-Back Credit Card",
+        "name": "Money-Back Credit Card (AVG)",
         "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
         "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.01,
-          "groceries": 0.01,
-          "entertainment": 0.01,
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
           "travel": 0.005,
           "other": 0.008
         },
         "promotional_cashback_rates": {
-          "gas": 0.01,
-          "groceries": 0.01,
-          "entertainment": 0.01,
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
           "travel": 0.005,
           "other": 0.008
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card (GAS)",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.02,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.005
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.02,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.005
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card (GROCERIES)",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card (ENTERTAINMENT)",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.02,
+          "travel": 0.005,
+          "other": 0.005
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.02,
+          "travel": 0.005,
+          "other": 0.005
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card (TRAVEL)",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.005,
+          "groceries": 0.02,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.008
+        },
+        "promotional_reward_length": 0,
+        "promotional_reward_limit": 0, // in dollars
+        "promotional_fee_length": 0,
+        "annual_fee": 0,
+        "promotional_annual_fee": 0,
+        "promotional_bonus": 0 // in dollars
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Money-Back Credit Card (OTHER)",
+        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
+        "standard_cashback_rates": { //these rates are overall averages which is not correct
+          "gas": 0.005,
+          "groceries": 0.005,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.011
+        },
+        "promotional_cashback_rates": {
+          "gas": 0.005,
+          "groceries": 0.005,
+          "entertainment": 0.005,
+          "travel": 0.005,
+          "other": 0.011
         },
         "promotional_reward_length": 0,
         "promotional_reward_limit": 0, // in dollars
