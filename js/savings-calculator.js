@@ -12,6 +12,12 @@ function calculateMonthlySavings(interestRate, array_length, initial_savings, pr
   return savings_array;
 }
 
+function setOriginalValues() {
+  document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
+  document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
+  document.getElementById('difference-value').innerText = '$ ' + (series1Data[12] - series0Data[12]).toFixed((0));
+}
+
 var accounts_info = [
       {
         "bank": "EQ Bank",
@@ -142,11 +148,8 @@ var accounts_info = [
         item.innerHTML = innerHTML;
         bankProductsList.appendChild(item);
       });
-
-      // <p class="mb-1">Initial Interest Rate: ${product.initial_interest_rate}%</p>
-      // <p class="mb-1">Promotion Length: ${product.promotion_length} months</p>
-      // <p class="mb-1">Standard Interest Rate: ${product.standard_interest_rate}%</p>
-
+      // Add a class to the first button
+      document.querySelector('button[data-index="0"]').classList.add('active');
 
 
 // Define the data for the two series
@@ -200,6 +203,7 @@ var chartOptions = {
                 mouseOver: function () {
                     document.getElementById('savings1-value').innerText = '$ ' + series0Data[this.x].toFixed((0));
                     document.getElementById('savings2-value').innerText = '$ ' + series1Data[this.x].toFixed((0));
+                    document.getElementById('difference-value').innerText = '$ ' + (series1Data[this.x] - series0Data[this.x]).toFixed((0));
                 }
             }
         },
@@ -207,7 +211,8 @@ var chartOptions = {
             mouseOut: function () {
                 document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
                 document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
-            }
+                document.getElementById('difference-value').innerText = '$ ' + (series1Data[12] - series0Data[12]).toFixed((0));
+              }
         },
         color: '#90CAF9',
         fillOpacity: 0.1,
@@ -233,14 +238,23 @@ var chartOptions = {
 
 // Create the chart
 var savings_chart = Highcharts.chart('container-savings-calc', chartOptions);
+setOriginalValues();
 var current_product_index = 0;
 
 // Add click event listeners to each button
 var account_buttons = document.querySelectorAll('.account-btn');
 account_buttons.forEach(function(button) {
   button.addEventListener('click', function() {
+    // Remove the active class from all buttons
+    account_buttons.forEach(function(button) {
+      button.classList.remove('active');
+    });
+
     // Retrieve the index of the clicked button
     current_product_index = this.getAttribute('data-index');
+
+    // Add the active class to the clicked button
+    this.classList.add('active');
 
     // Retrieve the corresponding account information from the array
     var account = accounts_info[current_product_index];
@@ -253,6 +267,7 @@ account_buttons.forEach(function(button) {
     });
     series1Data = data;
     document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
+    document.getElementById('difference-value').innerText = '$ ' + (series1Data[12] - series0Data[12]).toFixed((0));
   });
 });
 
@@ -273,21 +288,15 @@ calcButton.addEventListener('click', function() {
   });
 
   savings_chart.series[1].update({
-    name: 'Your Current Rates',
+    name: 'New Product Rates',
     data: data1,
   });
 
-  console.log(data0);
-  console.log(data1);
-
-
+  series0Data = data0;
+  series1Data = data1;
   savings_chart.yAxis[0].setExtremes(savings, null);
-
-  // chartOptions.yAxis.min = savings;
-  // savings_chart.yAxis[0].update({
-  //   max: savings
-  // });
 
   document.getElementById('savings1-value').innerText = '$ ' + series0Data[12].toFixed((0));
   document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
+  document.getElementById('difference-value').innerText = '$ ' + (series1Data[12] - series0Data[12]).toFixed((0));
 });
