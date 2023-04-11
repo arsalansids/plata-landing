@@ -26,10 +26,28 @@ function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
   return monthly_cashback; 
 };
 
-function calculateCashbackAllMonths(monthly_spend_array, cashback_rates, persona) {
+function calculateCashbackAllMonths(
+  monthly_spend_array, 
+  standard_cashback_rates, 
+  promotional_cashback_rates,
+  promotional_reward_length,
+  promotional_reward_limit,
+  persona, 
+  initial_annual_fee
+) {
   var cashback = [];
-  var total = 0;
+  var cashback_rates;
+  var total = 0 - initial_annual_fee;
   for (let i = 0; i < 12; i++) {
+    if (promotional_reward_length > 0 && i < promotional_reward_length && promotional_reward_limit === null) {
+      cashback_rates = promotional_cashback_rates;
+    } else if (promotional_reward_limit !== null && i < promotional_reward_length) {
+      // Assuming here that promotional reward limits always get used in their timeframe
+      total = total + promotional_reward_limit/promotional_reward_length;
+      cashback_rates = standard_cashback_rates;
+    } else {
+      cashback_rates = standard_cashback_rates;
+    }
     total = total + calculateMonthlyCashback(monthly_spend_array[i], cashback_rates, persona);
     cashback.push(total);
   }
@@ -66,7 +84,7 @@ const credit_card_info = [
           "other": 0.10
         },
         "promotional_reward_length": 3,
-        "promotional_reward_limit": 2000, // in dollars
+        "promotional_reward_limit": 200, // in dollars of cashback
         "promotional_fee_length": 12,
         "annual_fee": 120,
         "promotional_annual_fee": 0,
@@ -170,7 +188,7 @@ const credit_card_info = [
           "other": 0.007
         },
         "promotional_reward_length": 4,
-        "promotional_reward_limit": 500, // in dollars
+        "promotional_reward_limit": 50, // in dollars of cashback earned
         "promotional_fee_length": 0,
         "annual_fee": 0,
         "promotional_annual_fee": 0,
@@ -352,7 +370,7 @@ const credit_card_info = [
           "other": 0.012
         },
         "promotional_reward_length": 0,
-        "promotional_reward_limit": 0, // in dollars
+        "promotional_reward_limit": null, // in dollars
         "promotional_fee_length": 12,
         "annual_fee": 139,
         "promotional_annual_fee": 0,
@@ -378,7 +396,7 @@ const credit_card_info = [
           "other": 0.0223
         },
         "promotional_reward_length": 0,
-        "promotional_reward_limit": 0, // in dollars
+        "promotional_reward_limit": null, // in dollars
         "promotional_fee_length": 12,
         "annual_fee": 139,
         "promotional_annual_fee": 0,
@@ -463,8 +481,24 @@ var chartData = [  {
   }
 ];
 
-var monthlyCashbackPrimary = calculateCashbackAllMonths(monthly_spend_array, credit_card_info[primary_card_index].standard_cashback_rates, personas['groceries']);
-var monthlyCashbackSecondary = calculateCashbackAllMonths(monthly_spend_array, credit_card_info[secondary_card_index].standard_cashback_rates, personas['groceries']);
+var monthlyCashbackPrimary = calculateCashbackAllMonths(
+  monthly_spend_array,
+  credit_card_info[primary_card_index].standard_cashback_rates,
+  credit_card_info[primary_card_index].promotional_cashback_rates,
+  credit_card_info[primary_card_index].promotional_reward_length,
+  credit_card_info[primary_card_index].promotional_reward_limit,
+  personas['groceries'],
+  credit_card_info[primary_card_index].promotional_annual_fee,
+);
+var monthlyCashbackSecondary = calculateCashbackAllMonths(
+  monthly_spend_array, 
+  credit_card_info[secondary_card_index].standard_cashback_rates,
+  credit_card_info[secondary_card_index].promotional_cashback_rates,
+  credit_card_info[secondary_card_index].promotional_reward_length,
+  credit_card_info[secondary_card_index].promotional_reward_limit,
+  personas['groceries'],
+  credit_card_info[secondary_card_index].promotional_annual_fee,
+);
 
 chartData[0].data = monthlyCashbackPrimary;
 chartData[1].data = monthlyCashbackSecondary;
@@ -493,7 +527,7 @@ var chartOptions = {
     title: {
       text: '',
     },
-    min: 0,
+    // min: 0,
     // visible: false
   },
   legend: {
@@ -591,7 +625,15 @@ card_buttons.forEach(function(button) {
       this.classList.add('active-secondary');
 
       var card = credit_card_info[secondary_card_index];
-      monthlyCashbackSecondary = calculateCashbackAllMonths(monthly_spend_array, card.standard_cashback_rates, personas[persona]);
+      monthlyCashbackSecondary = calculateCashbackAllMonths(
+        monthly_spend_array, 
+        card.standard_cashback_rates, 
+        card.promotional_cashback_rates,
+        card.promotional_reward_length,
+        card.promotional_reward_limit,
+        personas[persona],
+        card.promotional_annual_fee
+      );
       series1Data = monthlyCashbackSecondary;
       cash_value_chart.series[1].update({
         name: card.name,
@@ -612,7 +654,15 @@ card_buttons.forEach(function(button) {
 
       // Retrieve the corresponding card information from the array
       var card = credit_card_info[primary_card_index];
-      monthlyCashbackPrimary = calculateCashbackAllMonths(monthly_spend_array, card.standard_cashback_rates, personas[persona]);
+      monthlyCashbackPrimary = calculateCashbackAllMonths(
+        monthly_spend_array, 
+        card.standard_cashback_rates,
+        card.promotional_cashback_rates,
+        card.promotional_reward_length,
+        card.promotional_reward_limit,
+        personas[persona],
+        card.promotional_annual_fee
+      );
       series0Data = monthlyCashbackPrimary;
       // Update the chart data with the new values
       cash_value_chart.series[0].update({
@@ -649,8 +699,24 @@ circles.forEach(circle => {
       persona = 'other';
     }
 
-    monthlyCashbackPrimary = calculateCashbackAllMonths(monthly_spend_array, credit_card_info[primary_card_index].standard_cashback_rates, personas[persona]);
-    monthlyCashbackSecondary = calculateCashbackAllMonths(monthly_spend_array, credit_card_info[secondary_card_index].standard_cashback_rates, personas[persona]);
+    monthlyCashbackPrimary = calculateCashbackAllMonths(
+      monthly_spend_array, 
+      credit_card_info[primary_card_index].standard_cashback_rates, 
+      credit_card_info[primary_card_index].promotional_cashback_rates,
+      credit_card_info[primary_card_index].promotional_reward_length,
+      credit_card_info[primary_card_index].promotional_reward_limit, 
+      personas[persona],
+      credit_card_info[primary_card_index].promotional_annual_fee
+    );
+    monthlyCashbackSecondary = calculateCashbackAllMonths(
+      monthly_spend_array, 
+      credit_card_info[secondary_card_index].standard_cashback_rates,
+      credit_card_info[secondary_card_index].promotional_cashback_rates,
+      credit_card_info[secondary_card_index].promotional_reward_length,
+      credit_card_info[secondary_card_index].promotional_reward_limit,
+      personas[persona],
+      credit_card_info[secondary_card_index].promotional_annual_fee
+    );
 
     cash_value_chart.series[0].update({
       name: credit_card_info[primary_card_index].bank + ' ' + credit_card_info[primary_card_index].name,
