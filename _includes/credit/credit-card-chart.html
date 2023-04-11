@@ -4,27 +4,34 @@
             <div class="col-lg-6 col-md-6">
                 <h4>Pick a credit card</h4>
             </div>  
-            <div class="col-lg-6 col-md-6"> 
-                <h4>Spending Habits</h4>
-            </div>  
         </div>
         <div class="row">
             <div id="container-credit-card-calc"></div>
         </div>
         <div class="row">
-            <div class="chart-info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+            <div class="chart-info col-lg-4  col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
                 <div>
                     <span class="circle-chart" style="background-color: #FAB131;"></span>
-                    <p class="account-detail-chart">Total Cash Value of Card</p>
+                    <p class="account-detail-chart">Total Cash Value</p>
                 </div>
-                <h4 class="account-value-chart" id="cash-value">$ 0</h4>
+                <h4 class="account-value-chart" id="cash-value-1"></h4>
+            </div>
+            <div class="chart-info col-lg-4  col-md-4 col-sm-4">
+                <div>
+                    <span class="circle-chart" style="background-color: #7CB6B7;"></span>
+                    <p class="account-detail-chart">Total Cash Value</p>
+                </div>
+                <h4 class="account-value-chart" id="cash-value-2"></h4>
+            </div>
+            <div class="chart-info col-lg-1 col-md-1 col-sm-1">
+                <div>
+                    <p class="account-detail-chart">Difference</p>
+                </div>
+                <h4 class="account-value-chart" id="difference-value"></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-7 col-md-7"> 
-                <p>Comparison Information</p>
-            </div>  
-            <div class="col-lg-5 col-md-5"> 
+            <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1"> 
                 <p>Referral Button Area</p>
             </div>  
         </div>
@@ -47,7 +54,7 @@
             </svg>
         </div>
         <!-- Banks List Section -->
-        <div id="credit-card-products-list" class="list-group"></div>
+        <div id="credit-card-products-list" class="list-group" style="height: 550px; overflow-y: scroll;"></div>
     </div>
 </div>
 

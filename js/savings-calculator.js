@@ -149,7 +149,7 @@ var accounts_info = [
         bankProductsList.appendChild(item);
       });
       // Add a class to the first button
-      document.querySelector('button[data-index="0"]').classList.add('active');
+      document.querySelector('button[data-index="0"]').classList.add('active-primary');
 
 
 // Define the data for the two series
@@ -247,14 +247,14 @@ account_buttons.forEach(function(button) {
   button.addEventListener('click', function() {
     // Remove the active class from all buttons
     account_buttons.forEach(function(button) {
-      button.classList.remove('active');
+      button.classList.remove('active-primary');
     });
 
     // Retrieve the index of the clicked button
     current_product_index = this.getAttribute('data-index');
 
     // Add the active class to the clicked button
-    this.classList.add('active');
+    this.classList.add('active-primary');
 
     // Retrieve the corresponding account information from the array
     var account = accounts_info[current_product_index];
@@ -266,8 +266,8 @@ account_buttons.forEach(function(button) {
       data,
     });
     series1Data = data;
-    document.getElementById('savings2-value').innerText = '$ ' + series1Data[12].toFixed((0));
-    document.getElementById('difference-value').innerText = '$ ' + (series1Data[12] - series0Data[12]).toFixed((0));
+    document.getElementById('savings2-value').innerText = '$' + series1Data[12].toFixed((0));
+    document.getElementById('difference-value').innerText = '$' + (series1Data[12] - series0Data[12]).toFixed((0));
   });
 });
 

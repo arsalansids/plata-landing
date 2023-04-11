@@ -16,6 +16,16 @@ function calculateCashbackAllMonths(monthly_avg_spend, cashback_rates, persona) 
   }
   return cashback;
 }
+// TODO - add a function to calculate the total cashback for all months
+function monthlyCashbackTotal(array_cashback) {
+  var totals = [];
+  var total = 0;
+  array_cashback.forEach((cashback) => {
+    total += cashback;
+    totals.push(total);
+  });
+  return totals;
+}
 
 function totalCashback(array_cashback) {
   var total = 0;
@@ -399,7 +409,9 @@ const personas =
     },
   };
 
-var current_card_index  = 0;
+var primary_card_index  = 0;
+var secondary_card_index  = 1;
+
 // Load Cards onto list
  const bankProductsList = document.getElementById('credit-card-products-list');
       credit_card_info.forEach((product, index) => {
@@ -414,23 +426,33 @@ var current_card_index  = 0;
           </div>`;
         bankProductsList.appendChild(item);
       });
-
+      document.querySelector('button[data-index="0"]').classList.add('active-primary');
+      document.querySelector('button[data-index="1"]').classList.add('active-secondary');
 
 // Define the data for the two series
 var chartData = [  {    
-    name: credit_card_info[current_card_index].bank + ':' + credit_card_info[current_card_index].name,
+    name: credit_card_info[primary_card_index].bank + ':' + credit_card_info[primary_card_index].name,
+    data: []
+  },
+  {
+    name: credit_card_info[secondary_card_index].bank + ':' + credit_card_info[secondary_card_index].name,
     data: []
   }
 ];
 
 // Define the initial cash value
 var spend = 4000;
-var monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[current_card_index].standard_cashback_rates, personas['average']);
-chartData[0].data = monthly_cashback;
-var total = totalCashback(monthly_cashback);
+var monthly_cashback_primary = calculateCashbackAllMonths(spend, credit_card_info[primary_card_index].standard_cashback_rates, personas['average']);
+var monthly_cashback_secondary = calculateCashbackAllMonths(spend, credit_card_info[secondary_card_index].standard_cashback_rates, personas['average']);
+
+chartData[0].data = monthly_cashback_primary;
+chartData[1].data = monthly_cashback_secondary;
+var total0 = totalCashback(monthly_cashback_primary);
+var total1 = totalCashback(monthly_cashback_secondary);
 
 // Chart Numbers that update with mouse
 var series0Data = chartData[0].data;
+var series1Data = chartData[1].data;
 
 // Define the options for the chart
 var chartOptions = {
@@ -461,13 +483,15 @@ var chartOptions = {
         point: {
             events: {
                 mouseOver: function () {
-                    document.getElementById('cash-value').innerText = '$ ' + series0Data[this.x].toFixed((0));
+                    document.getElementById('cash-value-1').innerText = '$ ' + series0Data[this.x].toFixed((0));
+                    document.getElementById('cash-value-2').innerText = '$ ' + series1Data[this.x].toFixed((0));
                 }
             }
         },
         events: {
             mouseOut: function () {
-                document.getElementById('cash-value').innerText = '$ ' + total.toFixed((0));
+                document.getElementById('cash-value-1').innerText = '$ ' + total0.toFixed((0));
+                document.getElementById('cash-value-2').innerText = '$ ' + total1.toFixed((0));
             }
         },
         color: '#90CAF9',
@@ -480,7 +504,12 @@ var chartOptions = {
   series: [{
     data: chartData[0].data,
     color: '#FAB131'
-  }],
+  },
+  {
+    data: chartData[1].data,
+    color: '#7CB6B7'
+  }
+  ],
   credits: {
     enabled: false
     },
@@ -492,6 +521,16 @@ var chartOptions = {
 // Create the chart
 var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);
 
+function setSummaryValues() {
+  var primary = totalCashback(monthly_cashback_primary).toFixed((0));
+  var secondary = totalCashback(monthly_cashback_secondary).toFixed((0));
+  document.getElementById('cash-value-1').innerText = '$' + primary;
+  document.getElementById('cash-value-2').innerText = '$' + secondary;
+  document.getElementById('difference-value').innerText = '$' + (primary - secondary).toFixed((0));
+}
+
+setSummaryValues();
+
 // set original persona
 let persona = 'groceries';
 let currentCircle = document.querySelector('#grocery_corner');;
@@ -502,19 +541,65 @@ currentCircle.setAttribute('r', '15');
 var card_buttons = document.querySelectorAll('.card-btn');
 card_buttons.forEach(function(button) {
   button.addEventListener('click', function() {
-    // Retrieve the index of the clicked button
-    current_card_index = this.getAttribute('data-index');
+    var clicked_index = this.getAttribute('data-index');
 
-    // Retrieve the corresponding card information from the array
-    var card = credit_card_info[current_card_index];
-    var data = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas[persona]);
+    if (clicked_index == primary_card_index) { 
+      primary_card_index = null; 
+      monthly_cashback_primary = [];
+      cash_value_chart.series[0].update({
+        name: 'No card picked',
+        data: monthly_cashback_primary,
+      });
+      button.classList.remove('active-primary');
+      setSummaryValues();
+      return;
+    }
+    if (clicked_index == secondary_card_index) { 
+      secondary_card_index = null; 
+      monthly_cashback_secondary = [];
+      cash_value_chart.series[1].update({
+        name: 'No card picked',
+        data: monthly_cashback_secondary,
+      });
+      button.classList.remove('active-secondary');
+      setSummaryValues();
+      return;
+    }
+    if (secondary_card_index == null) {
+      secondary_card_index = clicked_index;
+      this.classList.add('active-secondary');
 
-    // Update the chart data with the new values
-    cash_value_chart.series[0].update({
-      name: card.name,
-      data,
-    });
-    document.getElementById('cash-value').innerText = '$ ' + totalCashback(data).toFixed((0));
+      var card = credit_card_info[secondary_card_index];
+      monthly_cashback_secondary = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas[persona]);
+      series1Data = monthly_cashback_secondary;
+      cash_value_chart.series[1].update({
+        name: card.name,
+        data: monthly_cashback_secondary,
+      });
+      setSummaryValues();
+    } else {
+      // Remove the active class from all buttons
+      card_buttons.forEach(function(button) {
+        button.classList.remove('active-primary');
+      });
+
+      // Retrieve the index of the clicked button
+      primary_card_index = clicked_index;
+
+      // Add the active class to the clicked button
+      this.classList.add('active-primary');
+
+      // Retrieve the corresponding card information from the array
+      var card = credit_card_info[primary_card_index];
+      monthly_cashback_primary = calculateCashbackAllMonths(spend, card.standard_cashback_rates, personas[persona]);
+      series0Data = monthly_cashback_primary;
+      // Update the chart data with the new values
+      cash_value_chart.series[0].update({
+        name: card.name,
+        data: monthly_cashback_primary,
+      });
+      setSummaryValues();
+    }
   });
 });
 
@@ -543,13 +628,13 @@ circles.forEach(circle => {
       persona = 'other';
     }
 
-    monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[current_card_index].standard_cashback_rates, personas[persona]);
+    monthly_cashback = calculateCashbackAllMonths(spend, credit_card_info[primary_card_index].standard_cashback_rates, personas[persona]);
     total = totalCashback(monthly_cashback);
 
     cash_value_chart.series[0].update({
-      name: credit_card_info[current_card_index].bank + ' ' + credit_card_info[current_card_index].name,
+      name: credit_card_info[primary_card_index].bank + ' ' + credit_card_info[primary_card_index].name,
       data: monthly_cashback,
     });
-    document.getElementById('cash-value').innerText = '$ ' + totalCashback(monthly_cashback).toFixed((0));
+    setSummaryValues();
   });
 });
