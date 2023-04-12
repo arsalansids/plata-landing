@@ -1,5 +1,5 @@
 <div class="credit-card-calc-container">
-    <div class="col-lg-9 col-md-9 calc-comparison-container">
+    <div class="col-lg-9 col-md-9 col-sm-9 calc-comparison-container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <h4>Pick a credit card</h4>
@@ -16,7 +16,7 @@
                 </div>
                 <h4 class="account-value-chart" id="cash-value-1"></h4>
             </div>
-            <div class="chart-info col-lg-4  col-md-4 col-sm-4">
+            <div class="chart-info col-lg-4 col-md-4 col-sm-4">
                 <div>
                     <span class="circle-chart" style="background-color: #7CB6B7;"></span>
                     <p class="account-detail-chart">Total Cash Value</p>
@@ -36,24 +36,32 @@
             </div>  
         </div>
     </div>
-    <div class="col-lg-3 col-md-3">
-        <div class="container">
-            <svg viewBox="-50 -50 300 300" width="180" height="180">
-                <polygon points="100,10 190,80 150,180 50,180 10,80"
-                         style="fill:#299255;stroke:black;stroke-width:5;" />
-                <circle id="grocery_corner" cx="100" cy="10" r="10" fill="black" style="pointer-events: all; padding: 50px;" />
-                <circle id="travel_corner" cx="190" cy="80" r="10" fill="black" />
-                <circle id="auto_corner" cx="150" cy="180" r="10" fill="black" />
-                <circle id="entertainment_corner" cx="50" cy="180" r="10" fill="black" />
-                <circle id="other_corner" cx="10" cy="80" r="10" fill="black" />
-                <circle id="average_corner" cx="100" cy="95" r="10" fill="black" />
-                <text x="100" y="-5" text-anchor="middle" font-size="14">Groceries</text>
-                <text x="245" y="80" text-anchor="end" font-size="14">Travel</text>
-                <text x="150" y="204" text-anchor="middle" font-size="14">Auto &amp; Gas</text>
-                <text x="-10" y="204" text-anchor="start" font-size="14">Entertainment</text>
-                <text x="-42" y="80" text-anchor="start" font-size="14">Other</text>
-                <text x="100" y="120" text-anchor="middle" font-size="14" fill="white">Average</text>
-            </svg>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <div class="range-slider">
+                    <input class="input-range" orient="vertical" type="range" step="100" value="4000" min="500" max="10000">
+                    <span class="range-value"></span>
+                </div> 
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <svg viewBox="-50 -50 295 280" width="180" height="180">
+                    <polygon points="100,10 190,80 150,180 50,180 10,80"
+                             style="fill:#299255;stroke:black;stroke-width:5;" />
+                    <circle id="grocery_corner" cx="100" cy="10" r="10" fill="black" style="pointer-events: all; padding: 50px;" />
+                    <circle id="travel_corner" cx="190" cy="80" r="10" fill="black" />
+                    <circle id="auto_corner" cx="150" cy="180" r="10" fill="black" />
+                    <circle id="entertainment_corner" cx="50" cy="180" r="10" fill="black" />
+                    <circle id="other_corner" cx="10" cy="80" r="10" fill="black" />
+                    <circle id="average_corner" cx="100" cy="95" r="10" fill="black" />
+                    <text x="100" y="-5" text-anchor="middle" font-size="14">Groceries</text>
+                    <text x="245" y="80" text-anchor="end" font-size="14">Travel</text>
+                    <text x="150" y="204" text-anchor="middle" font-size="14">Auto &amp; Gas</text>
+                    <text x="-10" y="204" text-anchor="start" font-size="14">Entertainment</text>
+                    <text x="-42" y="80" text-anchor="start" font-size="14">Other</text>
+                    <text x="100" y="120" text-anchor="middle" font-size="14" fill="white">Average</text>
+                </svg>
+            </div>
         </div>
         <!-- Banks List Section -->
         <div id="credit-card-products-list" class="list-group" style="height: 550px; overflow-y: scroll;"></div>

@@ -1,19 +1,24 @@
 // Define the initial cash value
-var annual_spend_avg = 4000*12;
-var monthly_spend_array = [
-  annual_spend_avg*0.09,
-  annual_spend_avg*0.04,
-  annual_spend_avg*0.07,
-  annual_spend_avg*0.04,
-  annual_spend_avg*0.06,
-  annual_spend_avg*0.06,
-  annual_spend_avg*0.09,
-  annual_spend_avg*0.08,
-  annual_spend_avg*0.11,
-  annual_spend_avg*0.09,
-  annual_spend_avg*0.13,
-  annual_spend_avg*0.14
-];
+var monthlyAverageSpend = 4000;
+
+function monthlyAverageSpendArray(monthlyAverageSpend) {
+  return [
+    monthlyAverageSpend * 0.09 * 12,
+    monthlyAverageSpend * 0.04 * 12,
+    monthlyAverageSpend * 0.07 * 12,
+    monthlyAverageSpend * 0.04 * 12,
+    monthlyAverageSpend * 0.06 * 12,
+    monthlyAverageSpend * 0.06 * 12,
+    monthlyAverageSpend * 0.09 * 12,
+    monthlyAverageSpend * 0.08 * 12,
+    monthlyAverageSpend * 0.11 * 12,
+    monthlyAverageSpend * 0.09 * 12,
+    monthlyAverageSpend * 0.13 * 12,
+    monthlyAverageSpend * 0.14 * 12
+  ];
+}
+
+var monthly_spend_array = monthlyAverageSpendArray(monthlyAverageSpend);
 
 function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
   var monthly_cashback = 0;
@@ -502,8 +507,6 @@ var monthlyCashbackSecondary = calculateCashbackAllMonths(
 
 chartData[0].data = monthlyCashbackPrimary;
 chartData[1].data = monthlyCashbackSecondary;
-var total0 = monthlyCashbackPrimary[monthlyCashbackPrimary.length - 1];
-var total1 = monthlyCashbackSecondary[monthlyCashbackSecondary.length - 1];
 
 // Chart Numbers that update with mouse
 var series0Data = chartData[0].data;
@@ -540,14 +543,16 @@ var chartOptions = {
                 mouseOver: function () {
                     document.getElementById('cash-value-1').innerText = '$ ' + series0Data[this.x].toFixed((0));
                     document.getElementById('cash-value-2').innerText = '$ ' + series1Data[this.x].toFixed((0));
+                    document.getElementById('difference-value').innerText = '$' + Math.abs((series0Data[this.x] - series1Data[this.x]).toFixed((0)));
                 }
             }
         },
         events: {
             mouseOut: function () {
-                document.getElementById('cash-value-1').innerText = '$ ' + total0.toFixed((0));
-                document.getElementById('cash-value-2').innerText = '$ ' + total1.toFixed((0));
-            }
+                document.getElementById('cash-value-1').innerText = '$ ' + series0Data[series0Data.length - 1].toFixed((0));
+                document.getElementById('cash-value-2').innerText = '$ ' + series1Data[series1Data.length - 1].toFixed((0));
+                document.getElementById('difference-value').innerText = '$' + Math.abs((series0Data[series0Data.length - 1] - series1Data[series1Data.length - 1]).toFixed((0)));
+              }
         },
         color: '#90CAF9',
         fillOpacity: 0.1,
@@ -734,4 +739,13 @@ circles.forEach(circle => {
     }
     setSummaryValues();
   });
+});
+
+var range = document.querySelector('.input-range');
+var value = document.querySelector('.range-value');
+    
+value.innerText = '$' + range.value;
+range.addEventListener('input', function(){
+  monthly_spend_array = monthlyAverageSpendArray(this.value);
+  value.innerText = '$' + this.value;
 });
