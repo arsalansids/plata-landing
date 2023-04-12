@@ -22,6 +22,7 @@ var accounts_info = [
       {
         "bank": "EQ Bank",
         "name": "Savings Plus Account",
+        "reference_url":"https://www.eqbank.ca/personal-banking/savings-plus-account",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 2.50
@@ -29,6 +30,7 @@ var accounts_info = [
       {
         "bank": "Saven Financial",
         "name": "High Interest Savings Account",
+        "reference_url":"https://savenfinancial.ca/en/on-high-interest-savings-account",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 3.75
@@ -36,6 +38,7 @@ var accounts_info = [
       {
         "bank": "Scotiabank",
         "name": "Momentum PLUS Savings Account (360-premium)",
+        "reference_url": "https://www.scotiabank.com/ca/en/personal/bank-accounts/savings-accounts/momentum-plus-savings-account.html", 
         "initial_interest_rate": 5.00,
         "promotion_length": 5,
         "standard_interest_rate": 1.60
@@ -43,6 +46,7 @@ var accounts_info = [
       {
         "bank": "Alterna Bank",
         "name": "High Interest eSavings Account",
+        "reference_url": "https://www.alternabank.ca/en/personal/accounts/high-interest-esavings/",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 2.50
@@ -50,6 +54,7 @@ var accounts_info = [
       {
         "bank": "National Bank",
         "name": "High Interest Savings Account",
+        "reference_url":"https://www.nbc.ca/personal/savings-investments/accounts/high-interest.html",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 1.50
@@ -57,6 +62,7 @@ var accounts_info = [
       {
         "bank": "DUCA Credit Union",
         "name": "Earn More Savings Promotion Account",
+        "reference_url":"https://www.duca.com/earnmore",
         "initial_interest_rate": 4.75,
         "promotion_length": 1,
         "standard_interest_rate": 1.00
@@ -64,6 +70,7 @@ var accounts_info = [
       {
         "bank": "HSBC",
         "name": "High Rate Savings Account",
+        "reference_url":"https://www.hsbc.ca/savings-accounts/products/high-rate/",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 1.05
@@ -71,6 +78,7 @@ var accounts_info = [
       {
         "bank": "Simplii Financial",
         "name": "High Interest Savings Account",
+        "reference_url":"https://www.simplii.com/en/bank-accounts/high-interest-savings.html",
         "initial_interest_rate": 5.25,
         "promotion_length": 1,
         "standard_interest_rate": 0.40
@@ -78,6 +86,7 @@ var accounts_info = [
       {
         "bank": "Scotiabank",
         "name": "Money Master Savings Account",
+        "reference_url":"https://www.scotiabank.com/ca/en/personal/bank-accounts/savings-accounts/money-master-savings-account.html",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 0.01
@@ -85,6 +94,7 @@ var accounts_info = [
       {
         "bank": "Oaken Financial",
         "name": "Oaken Savings Account",
+        "reference_url":"https://www.oaken.com/oaken-savings-account/",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 3.40
@@ -92,6 +102,7 @@ var accounts_info = [
       {
         "bank": "CIBC",
         "name": "eAdvantage Savings Account",
+        "reference_url": "https://www.cibc.com/en/personal-banking/bank-accounts/savings-accounts/eadvantage-high-interest-savings-account.html",
         "initial_interest_rate": 4.25,
         "promotion_length": 4,
         "standard_interest_rate": 1.40
@@ -99,6 +110,7 @@ var accounts_info = [
       {
         "bank": "Scotiabank",
         "name": "Savings Accelerator Account",
+        "reference_url":"https://www.scotiabank.com/ca/en/personal/bank-accounts/savings-accounts/savings-accelerator-account.html",
         "initial_interest_rate": 4.05,
         "promotion_length": 1,
         "standard_interest_rate": 1.40
@@ -106,6 +118,7 @@ var accounts_info = [
       {
         "bank": "RBC Royal Bank",
         "name": "High Interest eSavings",
+        "reference_url":"https://www.rbcroyalbank.com/accounts/e-savings.html",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 1.50
@@ -113,6 +126,7 @@ var accounts_info = [
       {
         "bank": "TD Bank",
         "name": "High Interest Savings Account",
+        "reference_url":"https://www.td.com/ca/en/personal-banking/products/bank-accounts/savings-accounts/high-interest-savings-account",
         "initial_interest_rate": 0,
         "promotion_length": 0,
         "standard_interest_rate": 0.05
@@ -120,6 +134,7 @@ var accounts_info = [
       {
         "bank": "TD Bank",
         "name": "Every Day Savings Account",
+        "reference_url":"https://www.td.com/ca/en/personal-banking/products/bank-accounts/savings-accounts/every-day-savings-account",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 0.01
@@ -127,6 +142,7 @@ var accounts_info = [
       {
         "bank": "RBC Royal Bank",
         "name": "Day to Day Savings",
+        "reference_url":"https://www.rbcroyalbank.com/accounts/day-to-day-savings.html",
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 0.01
