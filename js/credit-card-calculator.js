@@ -21,7 +21,7 @@ function monthlyAverageSpendArray(monthlyAverageSpend) {
 var monthly_spend_array = monthlyAverageSpendArray(monthlyAverageSpend);
 
 function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
-  var monthly_cashback = 0;
+  let monthly_cashback = 0;
   let categories = Object.keys(cashback_rates);
   categories.forEach((category) => {    
     monthly_cashback += cashback_rates[category] * monthly_avg_spend * persona[category];
@@ -40,9 +40,9 @@ function calculateCashbackAllMonths(
   persona, 
   initial_annual_fee
 ) {
-  var cashback = [];
-  var cashback_rates;
-  var total = 0 - initial_annual_fee;
+  let cashback = [];
+  let cashback_rates;
+  let total = 0 - initial_annual_fee;
   for (let i = 0; i < 12; i++) {
     if (promotional_reward_length > 0 && i < promotional_reward_length && promotional_reward_limit === null) {
       cashback_rates = promotional_cashback_rates;
@@ -59,8 +59,8 @@ function calculateCashbackAllMonths(
   return cashback;
 }
 function monthlyCashbackTotal(array_cashback) {
-  var totals = [];
-  var total = 0;
+  let totals = [];
+  let total = 0;
   array_cashback.forEach((cashback) => {
     total += cashback;
     totals.push(total);
@@ -69,7 +69,7 @@ function monthlyCashbackTotal(array_cashback) {
 }
 
 function loadCardImage(cardUrl, bankName, cardName, position) {
-  var img, bankLabel, cardLabel;
+  let img, bankLabel, cardLabel;
   if (position === 'primary') {
     img = document.getElementById('primary-img');
     bankLabel = document.getElementById('primary-label-bank');
@@ -477,7 +477,7 @@ var secondary_card_index  = 1;
 // Load Cards onto list
 const bankProductsList = document.getElementById('credit-card-products-list');
 credit_card_info.forEach((product, index) => {
-  var item = document.createElement('a');
+  let item = document.createElement('a');
   item.classList.add('list-group-item', 'list-group-item-action');
   item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 card-btn block">
     <div class="col-lg-3 col-md-3" col-sm-3">
@@ -609,8 +609,8 @@ var chartOptions = {
 var cash_value_chart = Highcharts.chart('container-credit-card-calc', chartOptions);
 
 function setSummaryValues() {
-  var primary = monthlyCashbackPrimary.length > 0 ? monthlyCashbackPrimary[monthlyCashbackPrimary.length - 1].toFixed((0)) : 0;
-  var secondary = monthlyCashbackSecondary.length > 0 ? monthlyCashbackSecondary[monthlyCashbackSecondary.length - 1].toFixed((0)) : 0;
+  let primary = monthlyCashbackPrimary.length > 0 ? monthlyCashbackPrimary[monthlyCashbackPrimary.length - 1].toFixed((0)) : 0;
+  let secondary = monthlyCashbackSecondary.length > 0 ? monthlyCashbackSecondary[monthlyCashbackSecondary.length - 1].toFixed((0)) : 0;
   document.getElementById('cash-value-1').innerText = '$' + primary;
   document.getElementById('cash-value-2').innerText = '$' + secondary;
   document.getElementById('difference-value').innerText = '$' + Math.abs((primary - secondary).toFixed((0)));
@@ -628,7 +628,7 @@ currentCircle.setAttribute('r', '15');
 var card_buttons = document.querySelectorAll('.card-btn');
 card_buttons.forEach(function(button) {
   button.addEventListener('click', function() {
-    var clicked_index = this.getAttribute('data-index');
+    let clicked_index = this.getAttribute('data-index');
 
     if (clicked_index == primary_card_index) { 
       primary_card_index = null; 
@@ -658,7 +658,7 @@ card_buttons.forEach(function(button) {
       secondary_card_index = clicked_index;
       this.classList.add('active-secondary');
 
-      var card = credit_card_info[secondary_card_index];
+      let card = credit_card_info[secondary_card_index];
       monthlyCashbackSecondary = calculateCashbackAllMonths(
         monthly_spend_array, 
         card.standard_cashback_rates, 
@@ -688,7 +688,7 @@ card_buttons.forEach(function(button) {
       this.classList.add('active-primary');
 
       // Retrieve the corresponding card information from the array
-      var card = credit_card_info[primary_card_index];
+      let card = credit_card_info[primary_card_index];
       monthlyCashbackPrimary = calculateCashbackAllMonths(
         monthly_spend_array, 
         card.standard_cashback_rates,
