@@ -68,6 +68,22 @@ function monthlyCashbackTotal(array_cashback) {
   return totals;
 }
 
+function loadCardImage(cardUrl, bankName, cardName, position) {
+  var img, bankLabel, cardLabel;
+  if (position === 'primary') {
+    img = document.getElementById('primary-img');
+    bankLabel = document.getElementById('primary-label-bank');
+    cardLabel = document.getElementById('primary-label-name');
+  } else if (position === 'secondary') {
+    img = document.getElementById('secondary-img');
+    bankLabel = document.getElementById('secondary-label-bank');
+    cardLabel = document.getElementById('secondary-label-name');
+  }
+  img.src = cardUrl;
+  bankLabel.innerHTML = bankName;
+  cardLabel.innerHTML = cardName;
+}
+
 const credit_card_info = [
       {
         "bank": "Scotiabank",
@@ -459,21 +475,21 @@ var primary_card_index  = 0;
 var secondary_card_index  = 1;
 
 // Load Cards onto list
- const bankProductsList = document.getElementById('credit-card-products-list');
-      credit_card_info.forEach((product, index) => {
-        var item = document.createElement('a');
-        item.classList.add('list-group-item', 'list-group-item-action');
-        item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 card-btn block">
-          <div class="col-lg-3 col-md-3" col-sm-3">
-            <img src=${product.image} alt="buttonpng" height=40px />
-          </div>
-          <div class="col-lg-9 col-md-9 col-sm-9">
-          ${product.bank} <br> ${product.name} </button> 
-          </div>`;
-        bankProductsList.appendChild(item);
-      });
-      document.querySelector('button[data-index="0"]').classList.add('active-primary');
-      document.querySelector('button[data-index="1"]').classList.add('active-secondary');
+const bankProductsList = document.getElementById('credit-card-products-list');
+credit_card_info.forEach((product, index) => {
+  var item = document.createElement('a');
+  item.classList.add('list-group-item', 'list-group-item-action');
+  item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 card-btn block">
+    <div class="col-lg-3 col-md-3" col-sm-3">
+      <img src=${product.image} alt="buttonpng" height=40px />
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9">
+    ${product.bank} <br> ${product.name} </button> 
+    </div>`;
+  bankProductsList.appendChild(item);
+});
+document.querySelector('button[data-index="0"]').classList.add('active-primary');
+document.querySelector('button[data-index="1"]').classList.add('active-secondary');
 
 // Define the data for the two series
 var chartData = [  {    
@@ -511,7 +527,18 @@ chartData[1].data = monthlyCashbackSecondary;
 // Chart Numbers that update with mouse
 var series0Data = chartData[0].data;
 var series1Data = chartData[1].data;
-
+loadCardImage(
+  credit_card_info[primary_card_index].image, 
+  credit_card_info[primary_card_index].bank, 
+  credit_card_info[primary_card_index].name, 
+  'primary'
+  );
+  loadCardImage(
+    credit_card_info[secondary_card_index].image, 
+    credit_card_info[secondary_card_index].bank, 
+    credit_card_info[secondary_card_index].name, 
+    'secondary'
+    );
 // Define the options for the chart
 var chartOptions = {
   chart: {
@@ -611,6 +638,7 @@ card_buttons.forEach(function(button) {
         data: monthlyCashbackPrimary,
       });
       button.classList.remove('active-primary');
+      loadCardImage('', '', '', 'primary');
       setSummaryValues();
       return;
     }
@@ -622,6 +650,7 @@ card_buttons.forEach(function(button) {
         data: monthlyCashbackSecondary,
       });
       button.classList.remove('active-secondary');
+      loadCardImage('', '', '', 'secondary');
       setSummaryValues();
       return;
     }
@@ -644,6 +673,7 @@ card_buttons.forEach(function(button) {
         name: card.name,
         data: monthlyCashbackSecondary,
       });
+      loadCardImage(card.image, card.bank, card.name, 'secondary');
       setSummaryValues();
     } else {
       // Remove the active class from all buttons
@@ -674,6 +704,7 @@ card_buttons.forEach(function(button) {
         name: card.name,
         data: monthlyCashbackPrimary,
       });
+      loadCardImage(card.image, card.bank, card.name, 'primary');
       setSummaryValues();
     }
   });
