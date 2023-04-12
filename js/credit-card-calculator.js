@@ -487,7 +487,7 @@ var monthlyCashbackPrimary = calculateCashbackAllMonths(
   credit_card_info[primary_card_index].promotional_cashback_rates,
   credit_card_info[primary_card_index].promotional_reward_length,
   credit_card_info[primary_card_index].promotional_reward_limit,
-  personas['groceries'],
+  personas['average'],
   credit_card_info[primary_card_index].promotional_annual_fee,
 );
 var monthlyCashbackSecondary = calculateCashbackAllMonths(
@@ -496,7 +496,7 @@ var monthlyCashbackSecondary = calculateCashbackAllMonths(
   credit_card_info[secondary_card_index].promotional_cashback_rates,
   credit_card_info[secondary_card_index].promotional_reward_length,
   credit_card_info[secondary_card_index].promotional_reward_limit,
-  personas['groceries'],
+  personas['average'],
   credit_card_info[secondary_card_index].promotional_annual_fee,
 );
 
@@ -587,8 +587,8 @@ function setSummaryValues() {
 setSummaryValues();
 
 // set original persona
-let persona = 'groceries';
-let currentCircle = document.querySelector('#grocery_corner');;
+let persona = 'average';
+let currentCircle = document.querySelector('#average_corner');;
 currentCircle.setAttribute('fill', '#FAB131');
 currentCircle.setAttribute('r', '15');
 
@@ -697,35 +697,41 @@ circles.forEach(circle => {
       persona = 'entertainment';
     } else if (circle.getAttribute('id') === 'other_corner') {
       persona = 'other';
+    } else if (circle.getAttribute('id') === 'average_corner') {
+      persona = 'average';
+    };
+
+    if (primary_card_index != null) {
+      monthlyCashbackPrimary = calculateCashbackAllMonths(
+        monthly_spend_array, 
+        credit_card_info[primary_card_index].standard_cashback_rates, 
+        credit_card_info[primary_card_index].promotional_cashback_rates,
+        credit_card_info[primary_card_index].promotional_reward_length,
+        credit_card_info[primary_card_index].promotional_reward_limit, 
+        personas[persona],
+        credit_card_info[primary_card_index].promotional_annual_fee
+      );
+      cash_value_chart.series[0].update({
+        name: credit_card_info[primary_card_index].bank + ' ' + credit_card_info[primary_card_index].name,
+        data: monthlyCashbackPrimary,
+      });
     }
 
-    monthlyCashbackPrimary = calculateCashbackAllMonths(
-      monthly_spend_array, 
-      credit_card_info[primary_card_index].standard_cashback_rates, 
-      credit_card_info[primary_card_index].promotional_cashback_rates,
-      credit_card_info[primary_card_index].promotional_reward_length,
-      credit_card_info[primary_card_index].promotional_reward_limit, 
-      personas[persona],
-      credit_card_info[primary_card_index].promotional_annual_fee
-    );
-    monthlyCashbackSecondary = calculateCashbackAllMonths(
-      monthly_spend_array, 
-      credit_card_info[secondary_card_index].standard_cashback_rates,
-      credit_card_info[secondary_card_index].promotional_cashback_rates,
-      credit_card_info[secondary_card_index].promotional_reward_length,
-      credit_card_info[secondary_card_index].promotional_reward_limit,
-      personas[persona],
-      credit_card_info[secondary_card_index].promotional_annual_fee
-    );
-
-    cash_value_chart.series[0].update({
-      name: credit_card_info[primary_card_index].bank + ' ' + credit_card_info[primary_card_index].name,
-      data: monthlyCashbackPrimary,
-    });
-    cash_value_chart.series[1].update({
-      name: credit_card_info[secondary_card_index].bank + ' ' + credit_card_info[secondary_card_index].name,
-      data: monthlyCashbackSecondary,
-    });
+    if (secondary_card_index != null) {
+      monthlyCashbackSecondary = calculateCashbackAllMonths(
+        monthly_spend_array, 
+        credit_card_info[secondary_card_index].standard_cashback_rates,
+        credit_card_info[secondary_card_index].promotional_cashback_rates,
+        credit_card_info[secondary_card_index].promotional_reward_length,
+        credit_card_info[secondary_card_index].promotional_reward_limit,
+        personas[persona],
+        credit_card_info[secondary_card_index].promotional_annual_fee
+      );
+      cash_value_chart.series[1].update({
+        name: credit_card_info[secondary_card_index].bank + ' ' + credit_card_info[secondary_card_index].name,
+        data: monthlyCashbackSecondary,
+      });
+    }
     setSummaryValues();
   });
 });
