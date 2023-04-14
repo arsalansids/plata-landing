@@ -332,7 +332,7 @@ const tangerinePersonasStandardRates = {
   }
 }
 
-function stardardRates(card, persona) {
+function standardRates(card, persona) {
   if (card.bank === "Tangerine") {
     return tangerinePersonasStandardRates[persona];
   } else {
@@ -574,10 +574,9 @@ card_buttons.forEach(function(button) {
       this.classList.add('active-secondary');
 
       let card = credit_card_info[secondary_card_index];
-      let standardRates = standardRates(card, persona);
       monthlyCashbackSecondary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        standardRates, 
+        standardRates(card, persona), 
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
@@ -605,10 +604,10 @@ card_buttons.forEach(function(button) {
 
       // Retrieve the corresponding card information from the array
       let card = credit_card_info[primary_card_index];
-      let standardRates = standardRates(card, persona);
+  
       monthlyCashbackPrimary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        standardRates,
+        standardRates(card, persona),
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
@@ -655,10 +654,9 @@ circles.forEach(circle => {
     };
 
     if (primary_card_index != null) {
-      let standardRates = standardRates(credit_card_info[primary_card_index], persona);
       monthlyCashbackPrimary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        standardRates, 
+        standardRates(credit_card_info[primary_card_index], persona), 
         credit_card_info[primary_card_index].promotional_cashback_rates,
         credit_card_info[primary_card_index].promotional_reward_length,
         credit_card_info[primary_card_index].promotional_reward_limit, 
@@ -671,10 +669,9 @@ circles.forEach(circle => {
       });
     }
     if (secondary_card_index != null) {
-      let standardRates = standardRates(credit_card_info[secondary_card_index], persona);
       monthlyCashbackSecondary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        standardRates,
+        standardRates(credit_card_info[secondary_card_index], persona),
         credit_card_info[secondary_card_index].promotional_cashback_rates,
         credit_card_info[secondary_card_index].promotional_reward_length,
         credit_card_info[secondary_card_index].promotional_reward_limit,
