@@ -59,20 +59,23 @@ function calculateCashbackAllMonths(
   return cashback;
 }
 
-function loadCardImage(cardUrl, bankName, cardName, position) {
-  let img, bankLabel, cardLabel;
+function loadCardImage(cardUrl, bankName, cardName, position, referralLink) {
+  let img, bankLabel, cardLabel, referral;
   if (position === 'primary') {
     img = document.getElementById('primary-img');
     bankLabel = document.getElementById('primary-label-bank');
     cardLabel = document.getElementById('primary-label-name');
+    referral = document.getElementById('primary-referral');
   } else if (position === 'secondary') {
     img = document.getElementById('secondary-img');
     bankLabel = document.getElementById('secondary-label-bank');
     cardLabel = document.getElementById('secondary-label-name');
+    referral = document.getElementById('secondary-referral');
   }
   img.src = cardUrl;
   bankLabel.innerHTML = bankName;
   cardLabel.innerHTML = cardName;
+  referral.href = referralLink;
 }
 
 const credit_card_info = [
@@ -303,11 +306,11 @@ const tangerinePersonasStandardRates = {
     "other": 0.005
   },
   "groceries": {
-    "gas": 0.1,
-    "groceries": 0.1,
-    "entertainment": 0.1,
-    "travel": 0.1,
-    "other": 0.1
+    "gas": 0.005,
+    "groceries": 0.02,
+    "entertainment": 0.005,
+    "travel": 0.005,
+    "other": 0.008
   },
   "entertainment": {
     "gas": 0.005,
@@ -336,7 +339,7 @@ function standardRates(card, persona) {
   if (card.bank === "Tangerine") {
     return tangerinePersonasStandardRates[persona];
   } else {
-    return [card.standard_cashback_rates];
+    return card.standard_cashback_rates;
   }
 }
 
@@ -446,14 +449,17 @@ loadCardImage(
   credit_card_info[primary_card_index].image, 
   credit_card_info[primary_card_index].bank, 
   credit_card_info[primary_card_index].name, 
-  'primary'
-  );
-  loadCardImage(
-    credit_card_info[secondary_card_index].image, 
-    credit_card_info[secondary_card_index].bank, 
-    credit_card_info[secondary_card_index].name, 
-    'secondary'
-    );
+  'primary',
+  credit_card_info[primary_card_index].referral_url
+);
+loadCardImage(
+  credit_card_info[secondary_card_index].image, 
+  credit_card_info[secondary_card_index].bank, 
+  credit_card_info[secondary_card_index].name, 
+  'secondary',
+  credit_card_info[secondary_card_index].referral_url
+
+);
 // Define the options for the chart
 var chartOptions = {
   chart: {
@@ -553,7 +559,7 @@ card_buttons.forEach(function(button) {
         data: monthlyCashbackPrimary,
       });
       button.classList.remove('active-primary');
-      loadCardImage('', '', '', 'primary');
+      loadCardImage('', '', '', 'primary', '');
       setSummaryValues();
       return;
     }
@@ -565,7 +571,7 @@ card_buttons.forEach(function(button) {
         data: monthlyCashbackSecondary,
       });
       button.classList.remove('active-secondary');
-      loadCardImage('', '', '', 'secondary');
+      loadCardImage('', '', '', 'secondary', '');
       setSummaryValues();
       return;
     }
@@ -588,7 +594,7 @@ card_buttons.forEach(function(button) {
         name: card.name,
         data: monthlyCashbackSecondary,
       });
-      loadCardImage(card.image, card.bank, card.name, 'secondary');
+      loadCardImage(card.image, card.bank, card.name, 'secondary', card.referral_url);
       setSummaryValues();
     } else {
       // Remove the active class from all buttons
@@ -620,7 +626,7 @@ card_buttons.forEach(function(button) {
         name: card.name,
         data: monthlyCashbackPrimary,
       });
-      loadCardImage(card.image, card.bank, card.name, 'primary');
+      loadCardImage(card.image, card.bank, card.name, 'primary', card.referral_url);
       setSummaryValues();
     }
   });

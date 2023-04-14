@@ -489,3 +489,28 @@ input::-moz-focus-inner {
     font-family: 'DM Sans', sans-serif;
     font-size: 1.3em;
 }
+
+.primary-card-container {
+    border:#FAB131 3px solid;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #FAB131;
+}
+
+.secondary-card-container {
+    border:#7CB6B7 3px solid;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #7CB6B7;
+}
+
+.bank-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.card-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1em;
+}
