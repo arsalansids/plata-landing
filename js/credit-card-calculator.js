@@ -58,15 +58,6 @@ function calculateCashbackAllMonths(
   }
   return cashback;
 }
-function monthlyCashbackTotal(array_cashback) {
-  let totals = [];
-  let total = 0;
-  array_cashback.forEach((cashback) => {
-    total += cashback;
-    totals.push(total);
-  });
-  return totals;
-}
 
 function loadCardImage(cardUrl, bankName, cardName, position) {
   let img, bankLabel, cardLabel;
@@ -217,145 +208,15 @@ const credit_card_info = [
       },
       {
         "bank": "Tangerine",
-        "name": "Money-Back Credit Card (AVG)",
+        "name": "Money-Back Credit Card",
         "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
         "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.005,
-          "groceries": 0.02,
-          "entertainment": 0.005,
-          "travel": 0.005,
-          "other": 0.008
-        },
-        "promotional_cashback_rates": {
-          "gas": 0.1,
-          "groceries": 0.1,
-          "entertainment": 0.1,
-          "travel": 0.1,
-          "other": 0.1
-        },
-        "promotional_reward_length": 2,
-        "promotional_reward_limit": 100, // in dollars
-        "promotional_fee_length": 0,
-        "annual_fee": 0,
-        "promotional_annual_fee": 0,
-        "promotional_bonus": 0 // in dollars
-      },
-      {
-        "bank": "Tangerine",
-        "name": "Money-Back Credit Card (GAS)",
-        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
-        "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.02,
-          "groceries": 0.02,
-          "entertainment": 0.005,
-          "travel": 0.005,
-          "other": 0.005
-        },
-        "promotional_cashback_rates": {
-          "gas": 0.1,
-          "groceries": 0.1,
-          "entertainment": 0.1,
-          "travel": 0.1,
-          "other": 0.1
-        },
-        "promotional_reward_length": 2,
-        "promotional_reward_limit": 100, // in dollars
-        "promotional_fee_length": 0,
-        "annual_fee": 0,
-        "promotional_annual_fee": 0,
-        "promotional_bonus": 0 // in dollars
-      },
-      {
-        "bank": "Tangerine",
-        "name": "Money-Back Credit Card (GROCERIES)",
-        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
-        "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.005,
-          "groceries": 0.02,
-          "entertainment": 0.005,
-          "travel": 0.005,
-          "other": 0.008
-        },
-        "promotional_cashback_rates": {
-          "gas": 0.1,
-          "groceries": 0.1,
-          "entertainment": 0.1,
-          "travel": 0.1,
-          "other": 0.1
-        },
-        "promotional_reward_length": 2,
-        "promotional_reward_limit": 100, // in dollars
-        "promotional_fee_length": 0,
-        "annual_fee": 0,
-        "promotional_annual_fee": 0,
-        "promotional_bonus": 0 // in dollars
-      },
-      {
-        "bank": "Tangerine",
-        "name": "Money-Back Credit Card (ENTERTAINMENT)",
-        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
-        "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.005,
-          "groceries": 0.02,
-          "entertainment": 0.01,
-          "travel": 0.005,
-          "other": 0.005
-        },
-        "promotional_cashback_rates": {
-          "gas": 0.1,
-          "groceries": 0.1,
-          "entertainment": 0.1,
-          "travel": 0.1,
-          "other": 0.1
-        },
-        "promotional_reward_length": 2,
-        "promotional_reward_limit": 100, // in dollars
-        "promotional_fee_length": 0,
-        "annual_fee": 0,
-        "promotional_annual_fee": 0,
-        "promotional_bonus": 0 // in dollars
-      },
-      {
-        "bank": "Tangerine",
-        "name": "Money-Back Credit Card (TRAVEL)",
-        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
-        "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.005,
-          "groceries": 0.02,
-          "entertainment": 0.005,
-          "travel": 0.005,
-          "other": 0.008
-        },
-        "promotional_cashback_rates": {
-          "gas": 0.1,
-          "groceries": 0.1,
-          "entertainment": 0.1,
-          "travel": 0.1,
-          "other": 0.1
-        },
-        "promotional_reward_length": 2,
-        "promotional_reward_limit": 100, // in dollars
-        "promotional_fee_length": 0,
-        "annual_fee": 0,
-        "promotional_annual_fee": 0,
-        "promotional_bonus": 0 // in dollars
-      },
-      {
-        "bank": "Tangerine",
-        "name": "Money-Back Credit Card (OTHER)",
-        "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/Tangerine-Money-Back-Credit-Card.png",
-        "referral_url": "https://www.tangerine.ca/en/products/spending/creditcard/money-back",
-        "standard_cashback_rates": { //these rates are overall averages which is not correct
-          "gas": 0.005,
-          "groceries": 0.005,
-          "entertainment": 0.005,
-          "travel": 0.005,
-          "other": 0.011
+        "standard_cashback_rates": { //pull rates from the tangerine function
+          "gas": 0,
+          "groceries": 0,
+          "entertainment": 0,
+          "travel": 0,
+          "other": 0
         },
         "promotional_cashback_rates": {
           "gas": 0.1,
@@ -423,8 +284,62 @@ const credit_card_info = [
         "promotional_annual_fee": 0,
         "promotional_bonus": 0 // in dollars
       }
-    ];
-  
+];
+
+// Tangerine card lets you select categories, so we make assumptions with average category spend here
+const tangerinePersonasStandardRates = {
+  "average": { 
+      "gas": 0.005,
+      "groceries": 0.02,
+      "entertainment": 0.005,
+      "travel": 0.005,
+      "other": 0.008
+    },
+  "gas": {
+    "gas": 0.02,
+    "groceries": 0.02,
+    "entertainment": 0.005,
+    "travel": 0.005,
+    "other": 0.005
+  },
+  "groceries": {
+    "gas": 0.1,
+    "groceries": 0.1,
+    "entertainment": 0.1,
+    "travel": 0.1,
+    "other": 0.1
+  },
+  "entertainment": {
+    "gas": 0.005,
+    "groceries": 0.02,
+    "entertainment": 0.01,
+    "travel": 0.005,
+    "other": 0.005
+  },
+  "travel": {
+    "gas": 0.005,
+    "groceries": 0.02,
+    "entertainment": 0.005,
+    "travel": 0.005,
+    "other": 0.008
+  },
+  "other": {
+    "gas": 0.005,
+    "groceries": 0.005,
+    "entertainment": 0.005,
+    "travel": 0.005,
+    "other": 0.011
+  }
+}
+
+function stardardRates(card, persona) {
+  if (card.bank === "Tangerine") {
+    return tangerinePersonasStandardRates[persona];
+  } else {
+    return [card.standard_cashback_rates];
+  }
+}
+
 const personas = 
   {
     "average": {
@@ -659,9 +574,10 @@ card_buttons.forEach(function(button) {
       this.classList.add('active-secondary');
 
       let card = credit_card_info[secondary_card_index];
+      let standardRates = standardRates(card, persona);
       monthlyCashbackSecondary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        card.standard_cashback_rates, 
+        standardRates, 
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
@@ -689,9 +605,10 @@ card_buttons.forEach(function(button) {
 
       // Retrieve the corresponding card information from the array
       let card = credit_card_info[primary_card_index];
+      let standardRates = standardRates(card, persona);
       monthlyCashbackPrimary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        card.standard_cashback_rates,
+        standardRates,
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
@@ -723,11 +640,11 @@ circles.forEach(circle => {
     currentCircle.setAttribute('fill', '#FAB131');
     currentCircle.setAttribute('r', '15');
     
-    if (circle.getAttribute('id') === 'grocery_corner') {
+    if (circle.getAttribute('id') === 'groceries_corner') {
       persona = 'groceries';
     } else if (circle.getAttribute('id') === 'travel_corner') {
       persona = 'travel';
-    } else if (circle.getAttribute('id') === 'auto_corner') {
+    } else if (circle.getAttribute('id') === 'gas_corner') {
       persona = 'gas';
     } else if (circle.getAttribute('id') === 'entertainment_corner') {
       persona = 'entertainment';
@@ -738,9 +655,10 @@ circles.forEach(circle => {
     };
 
     if (primary_card_index != null) {
+      let standardRates = standardRates(credit_card_info[primary_card_index], persona);
       monthlyCashbackPrimary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        credit_card_info[primary_card_index].standard_cashback_rates, 
+        standardRates, 
         credit_card_info[primary_card_index].promotional_cashback_rates,
         credit_card_info[primary_card_index].promotional_reward_length,
         credit_card_info[primary_card_index].promotional_reward_limit, 
@@ -752,11 +670,11 @@ circles.forEach(circle => {
         data: monthlyCashbackPrimary,
       });
     }
-
     if (secondary_card_index != null) {
+      let standardRates = standardRates(credit_card_info[secondary_card_index], persona);
       monthlyCashbackSecondary = calculateCashbackAllMonths(
         monthly_spend_array, 
-        credit_card_info[secondary_card_index].standard_cashback_rates,
+        standardRates,
         credit_card_info[secondary_card_index].promotional_cashback_rates,
         credit_card_info[secondary_card_index].promotional_reward_length,
         credit_card_info[secondary_card_index].promotional_reward_limit,
@@ -779,4 +697,5 @@ value.innerText = '$' + range.value;
 range.addEventListener('input', function(){
   monthly_spend_array = monthlyAverageSpendArray(this.value);
   value.innerText = '$' + this.value;
+  // document.getElementById("gas_corner").click();
 });
