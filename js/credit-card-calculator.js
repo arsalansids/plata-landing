@@ -397,7 +397,7 @@ const bankProductsList = document.getElementById('credit-card-products-list');
 credit_card_info.forEach((product, index) => {
   let item = document.createElement('a');
   item.classList.add('list-group-item', 'list-group-item-action');
-  item.innerHTML = `<button style="width:100%" data-index=${index} class="mb-1 card-btn block">
+  item.innerHTML = `<button style="width:100%" data-index=${index} id="card-btn-${index}" class="mb-1 card-btn block">
     <div class="col-lg-3 col-md-3" col-sm-3">
       <img src=${product.image} alt="buttonpng" height=40px />
     </div>
@@ -701,4 +701,10 @@ range.addEventListener('input', function(){
   monthly_spend_array = monthlyAverageSpendArray(this.value);
   value.innerText = '$' + this.value;
   // document.getElementById("gas_corner").click();
+  // let id;
+  // if (primary_card_index != null) {
+  //   id = "card-btn-" + primary_card_index;
+  // } else if (secondary_card_index != null) {
+  //   id = "card-btn-" + secondary_card_index;
+  // }
 });

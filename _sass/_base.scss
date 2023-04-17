@@ -271,7 +271,7 @@ header {
 }
 
 .btn-primary {
-    @include button-variant(white, $theme-primary, $theme-primary);
+    @include button-variant(white, #FAB131, $theme-primary);
 }
 
 .btn {

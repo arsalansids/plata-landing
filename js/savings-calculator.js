@@ -181,8 +181,8 @@ var chartData = [  {
 
 // Define the initial savings value
 var savings = 10000;
-chartData[0].data = calculateMonthlySavings(accounts_info[0].standard_interest_rate, 12, savings, accounts_info[0].promotion_length, accounts_info[0].promotion_rate)
-chartData[1].data = calculateMonthlySavings(accounts_info[1].standard_interest_rate, 12, savings, accounts_info[0].promotion_length, accounts_info[0].promotion_rate)
+chartData[0].data = calculateMonthlySavings(0.5, 12, savings, accounts_info[0].promotion_length, 0.5)
+chartData[1].data = calculateMonthlySavings(accounts_info[0].standard_interest_rate, 12, savings, accounts_info[0].promotion_length, accounts_info[0].promotion_rate)
 
 // Chart Numbers that update with mouse
 var series0Data = chartData[0].data;
