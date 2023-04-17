@@ -146,6 +146,14 @@ var accounts_info = [
         "initial_interest_rate": 0.00,
         "promotion_length": 0,
         "standard_interest_rate": 0.01
+      },
+      {
+        "bank": "Tangerine",
+        "name": "Savings Account",
+        "reference_url":"https://www.tangerine.ca/en/products/saving/savings-accounts/savings-account",
+        "initial_interest_rate": 5.00,
+        "promotion_length": 5,
+        "standard_interest_rate": 1.00
       }
     ];
   
