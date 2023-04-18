@@ -107,7 +107,8 @@ const credit_card_info = [
       },
       {
         "bank": "RBC",
-        "name": "Cashback Preferred World Elite Mastercard",
+        "name": "Cashback Preferred Mastercard",
+        //  World Elite 
         "image": "https://www.nerdwallet.com/ca/wp-content/uploads/sites/2/2021/09/RBC-Cash-Back-Preferred-World-Elite-Mastercard1.png",
         "referral_url": "https://apps.royalbank.com/uaw0/IAO/apply/cardapp?pid1=cashback_pref&ASC=3D0005&_gl=1*x34p88*_ga*MTUzNjQxMTM2MC4xNjgxMjM3NDQ1*_ga_89NPCTDXQR*MTY4MTIzNzQ0NC4xLjAuMTY4MTIzNzQ0NC42MC4wLjA.&_ga=2.33705889.1287853094.1681237445-1536411360.1681237445#!/main/intro",
         "standard_cashback_rates": {

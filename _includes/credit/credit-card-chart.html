@@ -1,25 +1,48 @@
 <div class="credit-card-calc-container">
     <div class="col-lg-9 col-md-9 col-sm-9 calc-comparison-container">
+        <div class="row" style="display:flex; justify-content: center; align-items: center">
+            <svg viewBox="-50 -50 295 280" width="180" height="180">
+                <polygon points="100,10 190,80 150,180 50,180 10,80"
+                            style="fill:#299255;stroke:black;stroke-width:5;" />
+                <circle id="groceries_corner" cx="100" cy="10" r="12" fill="black" style="pointer-events: all; padding: 50px;" />
+                <circle id="travel_corner" cx="190" cy="80" r="12" fill="black" />
+                <circle id="gas_corner" cx="150" cy="180" r="12" fill="black" />
+                <circle id="entertainment_corner" cx="50" cy="180" r="12" fill="black" />
+                <circle id="other_corner" cx="10" cy="80" r="12" fill="black" />
+                <circle id="average_corner" cx="100" cy="95" r="12" fill="black" />
+                <text x="100" y="-5" text-anchor="middle" font-size="14">Groceries</text>
+                <text x="245" y="80" text-anchor="end" font-size="14">Travel</text>
+                <text x="150" y="204" text-anchor="middle" font-size="14">Auto &amp; Gas</text>
+                <text x="-10" y="204" text-anchor="start" font-size="14">Entertainment</text>
+                <text x="-42" y="80" text-anchor="start" font-size="14">Other</text>
+                <text x="100" y="120" text-anchor="middle" font-size="14" fill="white">Average</text>
+            </svg>
+            <div class="range-slider">
+                <input class="input-range" orient="vertical" type="range" step="100" value="4000" min="500" max="10000">
+                <span class="range-value"></span>
+                <span style="font-size: 0.7em;">/month</span>
+            </div>
+        </div>
         <div class="row">
-            <div id="primary-card-box" class="col-lg-4 col-md-4 col-lg-offset-1 colg-md-offset-1 primary-card-container row">
+            <div id="primary-card-box" class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 primary-card-container row">
                 <div class="col-lg-4 col-md-4">
                     <a id="primary-referral" href="" target="_blank">
-                        <img id="primary-img" width="100" />
+                        <img id="primary-img" width="80" />
                     </a>
                 </div>
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-8 col-md-8 col-sm-8">
                     <span id="primary-label-bank" class="bank-label"></span>
                     <br>
                     <span id="primary-label-name" class="card-label"></span>
                 </div>
             </div>  
-            <div id="secondary-card-box" class="col-lg-4 col-md-4 col-lg-offset-1 colg-md-offset-1 secondary-card-container row">
+            <div id="secondary-card-box" class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 secondary-card-container row">
                 <div class="col-lg-4 col-md-4">
                     <a id="secondary-referral" href="" target="_blank">
-                        <img id="secondary-img" width="100" />
+                        <img id="secondary-img" width="80" />
                     </a>
                 </div>
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-8 col-md-8 col-sm-8">
                     <span id="secondary-label-bank" class="bank-label"></span>
                     <br>
                     <span id="secondary-label-name" class="card-label"></span>
@@ -29,7 +52,7 @@
         <div class="row">
             <div id="container-credit-card-calc"></div>
         </div>
-        <div class="row">
+        <div class="row summary-calcs">
             <div class="chart-info col-lg-4  col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
                 <div>
                     <span class="circle-chart" style="background-color: #FAB131;"></span>
@@ -53,35 +76,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="row">
-            <div class="col-sm-2 col-md-2">
-                <div class="range-slider">
-                    <input class="input-range" orient="vertical" type="range" step="100" value="4000" min="500" max="10000">
-                    <span class="range-value"></span>
-                    <span style="font-size: 0.7em;">/month</span>
-                </div>
-            </div>
-            <div class="col-sm-10 col-md-10">
-                <svg viewBox="-50 -50 295 280" width="180" height="180">
-                    <polygon points="100,10 190,80 150,180 50,180 10,80"
-                             style="fill:#299255;stroke:black;stroke-width:5;" />
-                    <circle id="groceries_corner" cx="100" cy="10" r="10" fill="black" style="pointer-events: all; padding: 50px;" />
-                    <circle id="travel_corner" cx="190" cy="80" r="10" fill="black" />
-                    <circle id="gas_corner" cx="150" cy="180" r="10" fill="black" />
-                    <circle id="entertainment_corner" cx="50" cy="180" r="10" fill="black" />
-                    <circle id="other_corner" cx="10" cy="80" r="10" fill="black" />
-                    <circle id="average_corner" cx="100" cy="95" r="10" fill="black" />
-                    <text x="100" y="-5" text-anchor="middle" font-size="14">Groceries</text>
-                    <text x="245" y="80" text-anchor="end" font-size="14">Travel</text>
-                    <text x="150" y="204" text-anchor="middle" font-size="14">Auto &amp; Gas</text>
-                    <text x="-10" y="204" text-anchor="start" font-size="14">Entertainment</text>
-                    <text x="-42" y="80" text-anchor="start" font-size="14">Other</text>
-                    <text x="100" y="120" text-anchor="middle" font-size="14" fill="white">Average</text>
-                </svg>
-            </div>
-        </div>
-        <!-- Banks List Section -->
-        <div id="credit-card-products-list" class="list-group" style="height: 550px; overflow-y: scroll;"></div>
+        <div id="credit-card-products-list" class="list-group" style="height: 730px; overflow-y: scroll;"></div>
     </div>
 </div>
 
