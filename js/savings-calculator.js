@@ -207,15 +207,13 @@ var chartOptions = {
     text: null
   },
   xAxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    visible: false
+    categories: ['Today', '', '', '', '', '', '6 months','', '', '', '', '', '1 year']
   },
   yAxis: {
     title: {
       text: '',
     },
-    min: savings,
-    visible: false
+    min: savings
   },
   legend: {
     enabled: false
