@@ -207,7 +207,7 @@ var chartOptions = {
     text: null
   },
   xAxis: {
-    categories: ['', '', '', '', '', '', '', '6 months', '', '', '', '', '1 year']
+    categories: ['Today', '', '', '', '', '', '6 months','', '', '', '', '', '1 year']
   },
   yAxis: {
     title: {
