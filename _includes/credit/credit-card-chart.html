@@ -1,57 +1,57 @@
 <div class="credit-card-calc-container">
     <div class="col-lg-9 col-md-9 col-sm-9 calc-comparison-container">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-            <div class="input-group">
-                <span class="input-group-addon">Groceries ($)</span>	
-                <input id="groceries-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">Gas ($)</span>	
-                <input id="gas-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">Entertainment ($)</span>	
-                <input id="entertainment-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">Travel ($)</span>	
-                <input id="travel-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">Other ($)</span>	
-                <input id="other-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
-            </div>
-            <div class="row text-center" style="padding: 15px">
-                <button id="calculate-cash" type="button" class="btn btn-primary">Calculate</button>
-                <button id="revert-average" type="button" class="btn btn-secondary">Reset</button>
-            </div>
-        </div>
-        <div class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-            Hello
-        </div>
         <div class="row">
-            <div id="primary-card-box" class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 primary-card-container row">
-                <div class="col-lg-4 col-md-4">
-                    <a id="primary-referral" href="" target="_blank">
-                        <img id="primary-img" width="80" />
-                    </a>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+                <div class="input-group">
+                    <span class="input-group-addon">Groceries</span>	
+                    <input id="groceries-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8">
-                    <span id="primary-label-bank" class="bank-label"></span>
-                    <br>
-                    <span id="primary-label-name" class="card-label"></span>
+                <div class="input-group">
+                    <span class="input-group-addon">Gas</span>	
+                    <input id="gas-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
                 </div>
-            </div>  
-            <div id="secondary-card-box" class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 secondary-card-container row">
-                <div class="col-lg-4 col-md-4">
-                    <a id="secondary-referral" href="" target="_blank">
-                        <img id="secondary-img" width="80" />
-                    </a>
+                <div class="input-group">
+                    <span class="input-group-addon">Entertainment</span>	
+                    <input id="entertainment-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8">
-                    <span id="secondary-label-bank" class="bank-label"></span>
-                    <br>
-                    <span id="secondary-label-name" class="card-label"></span>
+                <div class="input-group">
+                    <span class="input-group-addon">Travel</span>	
+                    <input id="travel-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Other</span>	
+                    <input id="other-input" type="number" class="form-control" aria-label="Amount (rounded to the nearest dollar)" placeholder="4000">
+                </div>
+                <div class="row" style="padding: 15px">
+                    <button id="calculate-cashback" type="button" class="btn btn-primary">Calculate</button>
+                    <button id="revert-average" type="button" class="btn btn-secondary">Reset</button>
+                    <span id="total-spend" style="float:right"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div id="primary-card-box" class="card-box col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 primary-card-container row">
+                    <div class="col-lg-4 col-md-4">
+                        <a id="primary-referral" href="" target="_blank">
+                            <img id="primary-img" width="80" />
+                        </a>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <span id="primary-label-bank" class="bank-label"></span>
+                        <br>
+                        <span id="primary-label-name" class="card-label"></span>
+                    </div>
+                </div>  
+                <div id="secondary-card-box" class="card-box col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 secondary-card-container row">
+                    <div class="col-lg-4 col-md-4">
+                        <a id="secondary-referral" href="" target="_blank">
+                            <img id="secondary-img" width="80" />
+                        </a>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <span id="secondary-label-bank" class="bank-label"></span>
+                        <br>
+                        <span id="secondary-label-name" class="card-label"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,9 +82,9 @@
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3">
-        <div style="padding: 20px" class="text-center">
+        <!-- <div style="padding: 20px" class="text-center">
             <btn class="btn link-account-btn ">Link accounts for better cards</btn>
-        </div>
+        </div> -->
         <div id="credit-card-products-list" class="list-group" style="height: 730px; overflow-y: scroll;"></div>
     </div>
 </div>

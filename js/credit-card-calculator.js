@@ -1,44 +1,44 @@
-// Define the initial cash value
-var monthlyAverageSpend = 4000;
+const averageMonthlySpend = 4000;
+const averagePersona = 
+  {
+      "groceries": 0.115, // average - 460
+      "gas": 0.072, // average - 288
+      "entertainment": 0.127, // average - 508
+      "travel": 0.157, // * average - 628
+      "other": 0.529 // * average - 2124
+  };
 
-function monthlyAverageSpendArray(monthlyAverageSpend) {
-  return [
-    monthlyAverageSpend * 0.09 * 12,
-    monthlyAverageSpend * 0.04 * 12,
-    monthlyAverageSpend * 0.07 * 12,
-    monthlyAverageSpend * 0.04 * 12,
-    monthlyAverageSpend * 0.06 * 12,
-    monthlyAverageSpend * 0.06 * 12,
-    monthlyAverageSpend * 0.09 * 12,
-    monthlyAverageSpend * 0.08 * 12,
-    monthlyAverageSpend * 0.11 * 12,
-    monthlyAverageSpend * 0.09 * 12,
-    monthlyAverageSpend * 0.13 * 12,
-    monthlyAverageSpend * 0.14 * 12
-  ];
-}
+// Define the initial cash values per category, average total of 4000
+var groceriesSpend = averageMonthlySpend * averagePersona.groceries;
+var gasSpend = averageMonthlySpend * averagePersona.gas;
+var entertainmentSpend = averageMonthlySpend * averagePersona.entertainment;
+var travelSpend = averageMonthlySpend * averagePersona.travel;
+var otherSpend = averageMonthlySpend * averagePersona.other;
 
-var monthly_spend_array = monthlyAverageSpendArray(monthlyAverageSpend);
+var monthlyTotal = groceriesSpend + gasSpend + entertainmentSpend + travelSpend + otherSpend;
 
-function calculateMonthlyCashback(monthly_avg_spend, cashback_rates, persona) {
+function calculateMonthlyCashback(cashback_rates, spendByCategory) {
   let monthly_cashback = 0;
   let categories = Object.keys(cashback_rates);
   categories.forEach((category) => {    
-    monthly_cashback += cashback_rates[category] * monthly_avg_spend * persona[category];
+    monthly_cashback += cashback_rates[category] * spendByCategory[category];
   });
 
   // The monthly cashback is for a single month
   return monthly_cashback; 
 };
 
+function isValidNumber(input) {
+  return !isNaN(input) && isFinite(input);
+}
+
 function calculateCashbackAllMonths(
-  monthly_spend_array, 
   standard_cashback_rates, 
   promotional_cashback_rates,
   promotional_reward_length,
   promotional_reward_limit,
-  persona, 
-  initial_annual_fee
+  initial_annual_fee,
+  spendByCategory
 ) {
   let cashback = [];
   let cashback_rates;
@@ -53,7 +53,7 @@ function calculateCashbackAllMonths(
     } else {
       cashback_rates = standard_cashback_rates;
     }
-    total = total + calculateMonthlyCashback(monthly_spend_array[i], cashback_rates, persona);
+    total = total + calculateMonthlyCashback(cashback_rates, spendByCategory);
     cashback.push(total);
   }
   return cashback;
@@ -336,7 +336,7 @@ const tangerinePersonasStandardRates = {
   }
 }
 
-function standardRates(card, persona) {
+function standardRates(card, persona = 'average') {
   if (card.bank === "Tangerine") {
     return tangerinePersonasStandardRates[persona];
   } else {
@@ -344,51 +344,6 @@ function standardRates(card, persona) {
   }
 }
 
-const personas = 
-  {
-    "average": {
-      "gas": 0.072,
-      "groceries": 0.115,
-      "entertainment": 0.127,
-      "travel": 0.157,
-      "other": 0.529
-    },
-    "gas": {
-      "gas": 0.171,
-      "groceries": 0.103,
-      "entertainment": 0.113,
-      "travel": 0.14,
-      "other": 0.473
-    },
-    "groceries": {
-      "gas": 0.069,
-      "groceries": 0.162,
-      "entertainment": 0.12,
-      "travel": 0.148,
-      "other": 0.501
-    },
-    "entertainment": {
-      "gas": 0.066,
-      "groceries": 0.105,
-      "entertainment": 0.201,
-      "travel": 0.143,
-      "other": 0.484
-    },
-    "travel": {
-      "gas": 0.071,
-      "groceries": 0.113,
-      "entertainment": 0.125,
-      "travel": 0.17,
-      "other": 0.521
-    },
-    "other": {
-      "gas": 0.058,
-      "groceries": 0.092,
-      "entertainment": 0.101,
-      "travel": 0.125,
-      "other": 0.624
-    },
-  };
 
 var primary_card_index  = 0;
 var secondary_card_index  = 1;
@@ -422,22 +377,33 @@ var chartData = [  {
 ];
 
 var monthlyCashbackPrimary = calculateCashbackAllMonths(
-  monthly_spend_array,
   credit_card_info[primary_card_index].standard_cashback_rates,
   credit_card_info[primary_card_index].promotional_cashback_rates,
   credit_card_info[primary_card_index].promotional_reward_length,
   credit_card_info[primary_card_index].promotional_reward_limit,
-  personas['average'],
   credit_card_info[primary_card_index].promotional_annual_fee,
+  {
+    "groceries": groceriesSpend,
+    "gas": gasSpend,
+    "entertainment": entertainmentSpend,
+    "travel": travelSpend,
+    "other": otherSpend
+  }
+
 );
 var monthlyCashbackSecondary = calculateCashbackAllMonths(
-  monthly_spend_array, 
   credit_card_info[secondary_card_index].standard_cashback_rates,
   credit_card_info[secondary_card_index].promotional_cashback_rates,
   credit_card_info[secondary_card_index].promotional_reward_length,
   credit_card_info[secondary_card_index].promotional_reward_limit,
-  personas['average'],
   credit_card_info[secondary_card_index].promotional_annual_fee,
+  {
+    "groceries": groceriesSpend,
+    "gas": gasSpend,
+    "entertainment": entertainmentSpend,
+    "travel": travelSpend,
+    "other": otherSpend
+  }
 );
 
 chartData[0].data = monthlyCashbackPrimary;
@@ -461,6 +427,7 @@ loadCardImage(
   credit_card_info[secondary_card_index].referral_url
 
 );
+
 // Define the options for the chart
 var chartOptions = {
   chart: {
@@ -490,16 +457,16 @@ var chartOptions = {
         point: {
             events: {
                 mouseOver: function () {
-                    document.getElementById('cash-value-1').innerText = '$ ' + series0Data[this.x].toFixed((0));
-                    document.getElementById('cash-value-2').innerText = '$ ' + series1Data[this.x].toFixed((0));
+                    document.getElementById('cash-value-1').innerText = '$' + series0Data[this.x].toFixed((0));
+                    document.getElementById('cash-value-2').innerText = '$' + series1Data[this.x].toFixed((0));
                     document.getElementById('difference-value').innerText = '$' + Math.abs((series0Data[this.x] - series1Data[this.x]).toFixed((0)));
                 }
             }
         },
         events: {
             mouseOut: function () {
-                document.getElementById('cash-value-1').innerText = '$ ' + series0Data[series0Data.length - 1].toFixed((0));
-                document.getElementById('cash-value-2').innerText = '$ ' + series1Data[series1Data.length - 1].toFixed((0));
+                document.getElementById('cash-value-1').innerText = '$' + series0Data[series0Data.length - 1].toFixed((0));
+                document.getElementById('cash-value-2').innerText = '$' + series1Data[series1Data.length - 1].toFixed((0));
                 document.getElementById('difference-value').innerText = '$' + Math.abs((series0Data[series0Data.length - 1] - series1Data[series1Data.length - 1]).toFixed((0)));
               }
         },
@@ -536,15 +503,17 @@ function setSummaryValues() {
   document.getElementById('cash-value-1').innerText = '$' + primary;
   document.getElementById('cash-value-2').innerText = '$' + secondary;
   document.getElementById('difference-value').innerText = '$' + Math.abs((primary - secondary).toFixed((0)));
+  document.getElementById("total-spend").innerText = 'Total: $ ' + monthlyTotal;
+
+  document.getElementById("groceries-input").value = averageMonthlySpend * averagePersona.groceries;
+  document.getElementById("gas-input").value = averageMonthlySpend * averagePersona.gas;
+  document.getElementById("entertainment-input").value = averageMonthlySpend * averagePersona.entertainment;
+  document.getElementById("travel-input").value = averageMonthlySpend * averagePersona.travel;
+  document.getElementById("other-input").value = averageMonthlySpend * averagePersona.other;
+  document.getElementById("total-spend").innerText = 'Monthly Spend: $ ' + monthlyTotal;
 }
 
 setSummaryValues();
-
-// set original persona
-let persona = 'average';
-let currentCircle = document.querySelector('#average_corner');;
-currentCircle.setAttribute('fill', '#FAB131');
-currentCircle.setAttribute('r', '15');
 
 // Add click event listeners to each card button
 var card_buttons = document.querySelectorAll('.card-btn');
@@ -582,13 +551,18 @@ card_buttons.forEach(function(button) {
 
       let card = credit_card_info[secondary_card_index];
       monthlyCashbackSecondary = calculateCashbackAllMonths(
-        monthly_spend_array, 
-        standardRates(card, persona), 
+        standardRates(card), 
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
-        personas[persona],
-        card.promotional_annual_fee
+        card.promotional_annual_fee,
+        {
+          "groceries": groceriesSpend,
+          "gas": gasSpend,
+          "entertainment": entertainmentSpend,
+          "travel": travelSpend,
+          "other": otherSpend
+        }
       );
       series1Data = monthlyCashbackSecondary;
       cash_value_chart.series[1].update({
@@ -613,13 +587,18 @@ card_buttons.forEach(function(button) {
       let card = credit_card_info[primary_card_index];
   
       monthlyCashbackPrimary = calculateCashbackAllMonths(
-        monthly_spend_array, 
-        standardRates(card, persona),
+        standardRates(card),
         card.promotional_cashback_rates,
         card.promotional_reward_length,
         card.promotional_reward_limit,
-        personas[persona],
-        card.promotional_annual_fee
+        card.promotional_annual_fee,
+        {
+          "groceries": groceriesSpend,
+          "gas": gasSpend,
+          "entertainment": entertainmentSpend,
+          "travel": travelSpend,
+          "other": otherSpend
+        }
       );
       series0Data = monthlyCashbackPrimary;
       // Update the chart data with the new values
@@ -633,79 +612,125 @@ card_buttons.forEach(function(button) {
   });
 });
 
+var calcButton = document.getElementById("calculate-cashback");
+calcButton.addEventListener('click', function() {
+    // get values
+  var groceriesInput = parseInt(document.getElementById("groceries-input").value); 
+  var gasInput = parseInt(document.getElementById("gas-input").value);
+  var entertainmentInput = parseInt(document.getElementById("entertainment-input").value);
+  var travelInput = parseInt(document.getElementById("travel-input").value);
+  var otherInput = parseInt(document.getElementById("other-input").value);
 
-// Add event listeners to the pentagon circles
-const circles = document.querySelectorAll('circle');
-circles.forEach(circle => {
-  circle.addEventListener('click', function() {
-    if (currentCircle) {
-      currentCircle.setAttribute('fill', 'black');
-      currentCircle.setAttribute('r', '10');
-    }
-    currentCircle = circle;
-    currentCircle.setAttribute('fill', '#FAB131');
-    currentCircle.setAttribute('r', '15');
-    
-    if (circle.getAttribute('id') === 'groceries_corner') {
-      persona = 'groceries';
-    } else if (circle.getAttribute('id') === 'travel_corner') {
-      persona = 'travel';
-    } else if (circle.getAttribute('id') === 'gas_corner') {
-      persona = 'gas';
-    } else if (circle.getAttribute('id') === 'entertainment_corner') {
-      persona = 'entertainment';
-    } else if (circle.getAttribute('id') === 'other_corner') {
-      persona = 'other';
-    } else if (circle.getAttribute('id') === 'average_corner') {
-      persona = 'average';
-    };
+  // validate input and parse values
+  var totalSpendEl = document.getElementById("total-spend");
+  if (!isValidNumber(groceriesInput) || !isValidNumber(gasInput) || !isValidNumber(entertainmentInput) || !isValidNumber(travelInput) || !isValidNumber(otherInput)) {
+    totalSpendEl.innerText = 'Enter valid spend';
+    console.log('invalid input');
+    return;
+  } else {
+    groceriesSpend = groceriesInput;
+    gasSpend = gasInput;
+    entertainmentSpend = entertainmentInput;
+    travelSpend = travelInput;
+    otherSpend = otherInput;
 
-    if (primary_card_index != null) {
-      monthlyCashbackPrimary = calculateCashbackAllMonths(
-        monthly_spend_array, 
-        standardRates(credit_card_info[primary_card_index], persona), 
-        credit_card_info[primary_card_index].promotional_cashback_rates,
-        credit_card_info[primary_card_index].promotional_reward_length,
-        credit_card_info[primary_card_index].promotional_reward_limit, 
-        personas[persona],
-        credit_card_info[primary_card_index].promotional_annual_fee
-      );
-      cash_value_chart.series[0].update({
-        name: credit_card_info[primary_card_index].bank + ' ' + credit_card_info[primary_card_index].name,
-        data: monthlyCashbackPrimary,
-      });
-    }
-    if (secondary_card_index != null) {
-      monthlyCashbackSecondary = calculateCashbackAllMonths(
-        monthly_spend_array, 
-        standardRates(credit_card_info[secondary_card_index], persona),
-        credit_card_info[secondary_card_index].promotional_cashback_rates,
-        credit_card_info[secondary_card_index].promotional_reward_length,
-        credit_card_info[secondary_card_index].promotional_reward_limit,
-        personas[persona],
-        credit_card_info[secondary_card_index].promotional_annual_fee
-      );
-      cash_value_chart.series[1].update({
-        name: credit_card_info[secondary_card_index].bank + ' ' + credit_card_info[secondary_card_index].name,
-        data: monthlyCashbackSecondary,
-      });
-    }
+    monthlyTotal = groceriesSpend + gasSpend + entertainmentSpend + travelSpend + otherSpend;
+    totalSpendEl.innerText = 'Monthly Spend: $ ' + monthlyTotal;
+
+    let cardPrimary = credit_card_info[primary_card_index];
+    let cardSecondary = credit_card_info[secondary_card_index];
+
+    let monthlyCashbackPrimary = calculateCashbackAllMonths(
+      standardRates(cardPrimary),
+      cardPrimary.promotional_cashback_rates,
+      cardPrimary.promotional_reward_length,
+      cardPrimary.promotional_reward_limit,
+      cardPrimary.promotional_annual_fee,
+      {
+        "groceries": groceriesSpend,
+        "gas": gasSpend,
+        "entertainment": entertainmentSpend,
+        "travel": travelSpend,
+        "other": otherSpend
+      }
+    );
+    let monthlyCashbackSecondary = calculateCashbackAllMonths(
+      standardRates(cardSecondary),
+      cardSecondary.promotional_cashback_rates,
+      cardSecondary.promotional_reward_length,
+      cardSecondary.promotional_reward_limit,
+      cardSecondary.promotional_annual_fee,
+      {
+        "groceries": groceriesSpend,
+        "gas": gasSpend,
+        "entertainment": entertainmentSpend,
+        "travel": travelSpend,
+        "other": otherSpend
+      }
+    );
+
+    series0Data = monthlyCashbackPrimary;
+    series1Data = monthlyCashbackSecondary;
+
+    cash_value_chart.series[0].update({
+      name: cardPrimary.name,
+      data: monthlyCashbackPrimary,
+    });
+    cash_value_chart.series[1].update({
+      name: cardSecondary.name,
+      data: monthlyCashbackSecondary,
+    });
     setSummaryValues();
-  });
+  }
 });
 
-var range = document.querySelector('.input-range');
-var value = document.querySelector('.range-value');
-    
-value.innerText = '$' + range.value;
-range.addEventListener('input', function(){
-  monthly_spend_array = monthlyAverageSpendArray(this.value);
-  value.innerText = '$' + this.value;
-  // document.getElementById("gas_corner").click();
-  // let id;
-  // if (primary_card_index != null) {
-  //   id = "card-btn-" + primary_card_index;
-  // } else if (secondary_card_index != null) {
-  //   id = "card-btn-" + secondary_card_index;
-  // }
+var averageButton = document.getElementById("revert-average");
+averageButton.addEventListener('click', function() {
+  monthlyTotal = groceriesSpend + gasSpend + entertainmentSpend + travelSpend + otherSpend;
+  document.getElementById("total-spend").innerText = 'Monthly Spend: $ ' + monthlyTotal;
+
+  let cardPrimary = credit_card_info[primary_card_index];
+  let cardSecondary = credit_card_info[secondary_card_index];
+  let monthlyCashbackPrimary = calculateCashbackAllMonths(
+    standardRates(cardPrimary),
+    cardPrimary.promotional_cashback_rates,
+    cardPrimary.promotional_reward_length,
+    cardPrimary.promotional_reward_limit,
+    cardPrimary.promotional_annual_fee,
+    {
+      "groceries": averageMonthlySpend * averagePersona.groceries,
+      "gas": averageMonthlySpend * averagePersona.gas,
+      "entertainment": averageMonthlySpend * averagePersona.entertainment,
+      "travel": averageMonthlySpend * averagePersona.travel,
+      "other": averageMonthlySpend * averagePersona.other
+    }
+  );
+  series0Data = monthlyCashbackPrimary;
+  cash_value_chart.series[0].update({
+    name: cardPrimary.name,
+    data: monthlyCashbackPrimary,
+  });
+
+  let monthlyCashbackSecondary = calculateCashbackAllMonths(
+    standardRates(cardSecondary),
+    cardSecondary.promotional_cashback_rates,
+    cardSecondary.promotional_reward_length,
+    cardSecondary.promotional_reward_limit,
+    cardSecondary.promotional_annual_fee,
+    {
+      "groceries": averageMonthlySpend * averagePersona.groceries,
+      "gas": averageMonthlySpend * averagePersona.gas,
+      "entertainment": averageMonthlySpend * averagePersona.entertainment,
+      "travel": averageMonthlySpend * averagePersona.travel,
+      "other": averageMonthlySpend * averagePersona.other
+    }
+  );
+  series1Data = monthlyCashbackSecondary;
+  cash_value_chart.series[1].update({
+    name: cardSecondary.name,
+    data: monthlyCashbackSecondary,
+  });
+
+  monthlyTotal = averageMonthlySpend;
+  setSummaryValues();
 });
