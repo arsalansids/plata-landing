@@ -504,14 +504,15 @@ function setSummaryValues() {
   document.getElementById('cash-value-2').innerText = '$' + secondary;
   document.getElementById('difference-value').innerText = '$' + Math.abs((primary - secondary).toFixed((0)));
   document.getElementById("total-spend").innerText = 'Total: $ ' + monthlyTotal;
-
-  document.getElementById("groceries-input").value = averageMonthlySpend * averagePersona.groceries;
-  document.getElementById("gas-input").value = averageMonthlySpend * averagePersona.gas;
-  document.getElementById("entertainment-input").value = averageMonthlySpend * averagePersona.entertainment;
-  document.getElementById("travel-input").value = averageMonthlySpend * averagePersona.travel;
-  document.getElementById("other-input").value = averageMonthlySpend * averagePersona.other;
-  document.getElementById("total-spend").innerText = 'Monthly Spend: $ ' + monthlyTotal;
 }
+
+// Set to average values from persona
+document.getElementById("groceries-input").value = averageMonthlySpend * averagePersona.groceries;
+document.getElementById("gas-input").value = averageMonthlySpend * averagePersona.gas;
+document.getElementById("entertainment-input").value = averageMonthlySpend * averagePersona.entertainment;
+document.getElementById("travel-input").value = averageMonthlySpend * averagePersona.travel;
+document.getElementById("other-input").value = averageMonthlySpend * averagePersona.other;
+document.getElementById("total-spend").innerText = 'Monthly Spend: $ ' + monthlyTotal;
 
 setSummaryValues();
 
@@ -732,5 +733,12 @@ averageButton.addEventListener('click', function() {
   });
 
   monthlyTotal = averageMonthlySpend;
+
+  document.getElementById("groceries-input").value = averageMonthlySpend * averagePersona.groceries;
+  document.getElementById("gas-input").value = averageMonthlySpend * averagePersona.gas;
+  document.getElementById("entertainment-input").value = averageMonthlySpend * averagePersona.entertainment;
+  document.getElementById("travel-input").value = averageMonthlySpend * averagePersona.travel;
+  document.getElementById("other-input").value = averageMonthlySpend * averagePersona.other;
+  document.getElementById("total-spend").innerText = 'Monthly Spend: $ ' + monthlyTotal;
   setSummaryValues();
 });
